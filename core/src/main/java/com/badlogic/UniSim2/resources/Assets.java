@@ -7,9 +7,9 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * This class is used to store all textures that will be used in the game.
- * All textures are made public static variable and should not be changed
- * by another other class.
+ * This class is used to store all textures that will be used in the game. All
+ * textures are made public static variable and should not be changed by another
+ * other class.
  */
 public class Assets {
 
@@ -71,14 +71,17 @@ public class Assets {
     public static Texture natureCollisionTexture;
     public static Texture natureDraggingTexture;
 
-    private Assets() {};
+    private Assets() {
+    }
+
+    ;
 
     /**
      * This method loads all the textures that might be used.
      * Note that this method should not be called before libgdx has called the
      * {@link Main#create()} method. 
      */
-    public static void loadTextures(){
+    public static void loadTextures() {
 
         // =======================================
         // SOUND EFFECTS AND MUSIC.
@@ -87,13 +90,13 @@ public class Assets {
         click = Gdx.audio.newSound(Gdx.files.internal("sounds/click.mp3"));
 
         // Start menu textures
-        startBackgroundTexture =    new Texture("startBackground.png");
-        startButtonUpTexture =      new Texture("startButtonUp.png");
-        startButtonDownTexture =    new Texture("startButtonDown.png");
+        startBackgroundTexture = new Texture("startBackground.png");
+        startButtonUpTexture = new Texture("startButtonUp.png");
+        startButtonDownTexture = new Texture("startButtonDown.png");
 
         // Background texture
         backgroundTexture = new Texture("background.png");
-        pathTexture =       new Texture("path.png");
+        pathTexture = new Texture("path.png");
 
         menuBarTexture = new Texture("menuBar.png");
 
@@ -101,15 +104,14 @@ public class Assets {
         // BUTTON TEXTURES
         // =======================================
         // Building button textures when not hovering over
-        accomodationButtonUpTexture =   new Texture("textures/buttons/accomodationButtonUp.png");
-        lectureHallButtonUpTexture =    new Texture("textures/buttons/lectureHallButtonUp.png");
-        libraryButtonUpTexture =        new Texture("textures/buttons/libraryButtonUp.png");
-        courseButtonUpTexture =         new Texture("textures/buttons/courseButtonUp.png");
-        foodZoneButtonUpTexture =       new Texture("textures/buttons/foodZoneButtonUp.png");
-        recreationalButtonUpTexture =   new Texture("textures/buttons/recreationalButtonUp.png");
-        natureButtonUpTexture =         new Texture("textures/buttons/natureButtonUp.png");
-        buttonUpTextures = new Texture[]
-        {
+        accomodationButtonUpTexture = new Texture("textures/buttons/accomodationButtonUp.png");
+        lectureHallButtonUpTexture = new Texture("textures/buttons/lectureHallButtonUp.png");
+        libraryButtonUpTexture = new Texture("textures/buttons/libraryButtonUp.png");
+        courseButtonUpTexture = new Texture("textures/buttons/courseButtonUp.png");
+        foodZoneButtonUpTexture = new Texture("textures/buttons/foodZoneButtonUp.png");
+        recreationalButtonUpTexture = new Texture("textures/buttons/recreationalButtonUp.png");
+        natureButtonUpTexture = new Texture("textures/buttons/natureButtonUp.png");
+        buttonUpTextures = new Texture[]{
             accomodationButtonUpTexture,
             lectureHallButtonUpTexture,
             libraryButtonUpTexture,
@@ -121,14 +123,13 @@ public class Assets {
 
         // Building button textures when hovering over
         accomodationButtonDownTexture = new Texture("textures/buttons/accomodationButtonDown.png");
-        lectureHallButtonDownTexture =  new Texture("textures/buttons/lectureHallButtonDown.png");
-        libraryButtonDownTexture =      new Texture("textures/buttons/libraryButtonDown.png");
-        courseButtonDownTexture =       new Texture("textures/buttons/courseButtonDown.png");
-        foodZoneButtonDownTexture =     new Texture("textures/buttons/foodZoneButtonDown.png");
+        lectureHallButtonDownTexture = new Texture("textures/buttons/lectureHallButtonDown.png");
+        libraryButtonDownTexture = new Texture("textures/buttons/libraryButtonDown.png");
+        courseButtonDownTexture = new Texture("textures/buttons/courseButtonDown.png");
+        foodZoneButtonDownTexture = new Texture("textures/buttons/foodZoneButtonDown.png");
         recreationalButtonDownTexture = new Texture("textures/buttons/recreationalButtonDown.png");
-        natureButtonDownTexture =       new Texture("textures/buttons/natureButtonDown.png");
-        buttonDownTextures = new Texture[]
-        {
+        natureButtonDownTexture = new Texture("textures/buttons/natureButtonDown.png");
+        buttonDownTextures = new Texture[]{
             accomodationButtonDownTexture,
             lectureHallButtonDownTexture,
             libraryButtonDownTexture,
@@ -141,32 +142,32 @@ public class Assets {
         // =======================================
         // BUILDING SPRITE TEXTURES
         // =======================================
-        accomodationPlacedTexture =     new Texture("textures/buildings/accomodationPlaced.png");
-        accomodationCollisionTexture =  new Texture("textures/buildings/accomodationCollision.png");
-        accomodationDraggingTexture =   new Texture("textures/buildings/accomodationDragging.png");
+        accomodationPlacedTexture = new Texture("textures/buildings/accomodationPlaced.png");
+        accomodationCollisionTexture = new Texture("textures/buildings/accomodationCollision.png");
+        accomodationDraggingTexture = new Texture("textures/buildings/accomodationDragging.png");
 
-        lectureHallPlacedTexture =      new Texture("textures/buildings/lectureHallPlaced.png");
-        lectureHallCollisionTexture =   new Texture("textures/buildings/lectureHallCollision.png");
-        lectureHallDraggingTexture =    new Texture("textures/buildings/lectureHallDragging.png");
+        lectureHallPlacedTexture = new Texture("textures/buildings/lectureHallPlaced.png");
+        lectureHallCollisionTexture = new Texture("textures/buildings/lectureHallCollision.png");
+        lectureHallDraggingTexture = new Texture("textures/buildings/lectureHallDragging.png");
 
-        libraryPlacedTexture =          new Texture("textures/buildings/libraryPlaced.png");
-        libraryCollisionTexture =       new Texture("textures/buildings/libraryCollision.png");
-        libraryDraggingTexture =        new Texture("textures/buildings/libraryDragging.png");
+        libraryPlacedTexture = new Texture("textures/buildings/libraryPlaced.png");
+        libraryCollisionTexture = new Texture("textures/buildings/libraryCollision.png");
+        libraryDraggingTexture = new Texture("textures/buildings/libraryDragging.png");
 
-        coursePlacedTexture =           new Texture("textures/buildings/coursePlaced.png");
-        courseCollisionTexture =        new Texture("textures/buildings/courseCollision.png");
-        courseDraggingTexture =         new Texture("textures/buildings/courseDragging.png");
+        coursePlacedTexture = new Texture("textures/buildings/coursePlaced.png");
+        courseCollisionTexture = new Texture("textures/buildings/courseCollision.png");
+        courseDraggingTexture = new Texture("textures/buildings/courseDragging.png");
 
-        foodZonePlacedTexture =         new Texture("textures/buildings/foodZonePlaced.png");
-        foodZoneCollisionTexture =      new Texture("textures/buildings/foodZoneCollision.png");
-        foodZoneDraggingTexture =       new Texture("textures/buildings/foodZoneDragging.png");
+        foodZonePlacedTexture = new Texture("textures/buildings/foodZonePlaced.png");
+        foodZoneCollisionTexture = new Texture("textures/buildings/foodZoneCollision.png");
+        foodZoneDraggingTexture = new Texture("textures/buildings/foodZoneDragging.png");
 
-        recreationalPlacedTexture =     new Texture("textures/buildings/recreationalPlaced.png");
-        recreationalCollisionTexture =  new Texture("textures/buildings/recreationalCollision.png");
-        recreationalDraggingTexture =   new Texture("textures/buildings/recreationalDragging.png");
+        recreationalPlacedTexture = new Texture("textures/buildings/recreationalPlaced.png");
+        recreationalCollisionTexture = new Texture("textures/buildings/recreationalCollision.png");
+        recreationalDraggingTexture = new Texture("textures/buildings/recreationalDragging.png");
 
-        naturePlacedTexture =           new Texture("textures/buildings/naturePlaced.png");
-        natureCollisionTexture =        new Texture("textures/buildings/natureCollision.png");
-        natureDraggingTexture =         new Texture("textures/buildings/natureDragging.png");
+        naturePlacedTexture = new Texture("textures/buildings/naturePlaced.png");
+        natureCollisionTexture = new Texture("textures/buildings/natureCollision.png");
+        natureDraggingTexture = new Texture("textures/buildings/natureDragging.png");
     }
 }

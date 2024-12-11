@@ -1,30 +1,22 @@
 package com.badlogic.UniSim2;
 
-import com.badlogic.UniSim2.GUImanager.EndScreen;
-import com.badlogic.UniSim2.GUImanager.GameScreen;
-import com.badlogic.UniSim2.GUImanager.StartScreen;
-import com.badlogic.UniSim2.resources.*;
+import com.badlogic.UniSim2.core.Round;
+import com.badlogic.UniSim2.gui.screens.EndScreen;
+import com.badlogic.UniSim2.gui.screens.GameScreen;
+import com.badlogic.UniSim2.gui.screens.RoundScreen;
+import com.badlogic.UniSim2.gui.screens.StartScreen;
+import com.badlogic.UniSim2.resources.Assets;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
 
-    private StretchViewport viewport = new StretchViewport(Consts.WORLD_WIDTH, Consts.WORLD_HEIGHT);
-
-    private StartScreen startScreen;
-    private GameScreen gameScreen;
-    private EndScreen endScreen;
+    private GameScreen currentScreen;
+    private Round currentRound;
 
     @Override
     public void create() {
         Assets.loadTextures();
-        startScreen = new StartScreen(this);
-        setScreen(startScreen);
-    }
-
-    public StretchViewport getViewport() {
-        return viewport;
+        setGameScreen(new StartScreen(this::startNewRound));
     }
 
     @Override
@@ -32,23 +24,20 @@ public class Main extends Game {
         super.render();
     }
 
-    /**
-     * Starts the game by setting the screen to the {@link #gameScreen}. Should be
-     * called by the {@link StartScreen} when the start button is clicked.
-     */
-    public void startGame() {
-        gameScreen = new GameScreen(this);
-        setScreen(gameScreen);
-        startScreen.dispose();
+    private void setGameScreen(GameScreen screen) {
+        if (currentScreen != null) {
+            currentScreen.dispose();
+        }
+        currentScreen = screen;
+        setScreen(screen);
     }
 
-    /**
-     * Ends the game by settings the screen to {@link #endScreen}. Should be called by
-     * the {@link GameScreen} when the timer ends.
-     */
-    public void endGame() {
-        endScreen = new EndScreen(this, 0);
-        setScreen(endScreen);
-        gameScreen.dispose();
+    private void startNewRound() {
+        currentRound = new Round();
+        setGameScreen(new RoundScreen(currentRound, this::endGame));
+    }
+
+    private void endGame() {
+        setGameScreen(new EndScreen(0));
     }
 }

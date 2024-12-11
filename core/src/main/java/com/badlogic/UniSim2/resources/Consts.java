@@ -3,12 +3,13 @@ package com.badlogic.UniSim2.resources;
 import com.badlogic.gdx.graphics.Color;
 
 /**
- * This class is used to manage all the constants in the game. It allows
- * easy changes to be made to all constants within it.
+ * This class is used to manage all the constants in the game. It allows easy
+ * changes to be made to all constants within it.
  */
 public class Consts {
 
-    private Consts(){}
+    private Consts() {
+    }
 
     /**
      * Size of each cell in pixels, everything scales to the cell size.
@@ -17,10 +18,11 @@ public class Consts {
 
     /**
      * Scales a value according to the size of each grid cell.
+     *
      * @param value The value to scale.
      * @return value * {@link #CELL_SIZE}.
      */
-    private static int scaleToCellSize(int value){
+    private static int scaleToCellSize(int value) {
         return value * CELL_SIZE;
     }
     public static final int WORLD_WIDTH = scaleToCellSize(75);
@@ -59,7 +61,7 @@ public class Consts {
     public static final int V_PATH_4_Y = scaleToCellSize(0);
     public static final int V_PATH_4_HEIGHT = WORLD_HEIGHT;
 
-    public static final Color GRID_COLOR = new Color(0.28f,0.56f,0.11f, 1);
+    public static final Color GRID_COLOR = new Color(0.28f, 0.56f, 0.11f, 1);
     public static final int GRID_ROWS = WORLD_HEIGHT / CELL_SIZE;
     public static final int GRID_COLS = WORLD_WIDTH / CELL_SIZE;
 
@@ -84,10 +86,8 @@ public class Consts {
 
     public static final int SCORE_LABEL_WIDTH = scaleToCellSize(6);
     public static final int SCORE_LABEL_HEIGHT = scaleToCellSize(2);
-    public static final int SCORE_LABEL_X = (WORLD_WIDTH/2) - scaleToCellSize(4);
-    public static final int SCORE_LABEL_Y = (WORLD_HEIGHT/2) - scaleToCellSize(4);
-
-
+    public static final int SCORE_LABEL_X = (WORLD_WIDTH / 2) - scaleToCellSize(4);
+    public static final int SCORE_LABEL_Y = (WORLD_HEIGHT / 2) - scaleToCellSize(4);
 
     public static final Color COUNT_COLOR = new Color(Color.BLACK);
     public static final int COUNT_SIZE = 2;
@@ -95,26 +95,26 @@ public class Consts {
     public static final int MAP_MIN_X_BOUNDARY = MENU_BAR_X + MENU_BAR_WIDTH;
     public static final int MAP_MAX_X_BOUNDARY = WORLD_WIDTH;
     public static final int MAP_MIN_Y_BOUNDARY = scaleToCellSize(0);
-    public static final int MAP_MAX_Y_BOUNDARY = WORLD_HEIGHT;;
+    public static final int MAP_MAX_Y_BOUNDARY = WORLD_HEIGHT;
 
-    public static final int ACCOMODATION_WIDTH = scaleToCellSize(4);
-    public static final int ACCOMODATION_HEIGHT = scaleToCellSize(6);
+    public static final int ACCOMODATION_WIDTH = 4;
+    public static final int ACCOMODATION_HEIGHT = 6;
 
-    public static final int LECTUREHALL_WIDTH = scaleToCellSize(6);
-    public static final int LECTUREHALL_HEIGHT = scaleToCellSize(10);
+    public static final int LECTUREHALL_WIDTH = 6;
+    public static final int LECTUREHALL_HEIGHT = 10;
 
-    public static final int LIBRARY_WIDTH = scaleToCellSize(10);
-    public static final int LIBRARY_HEIGHT = scaleToCellSize(3);
+    public static final int LIBRARY_WIDTH = 10;
+    public static final int LIBRARY_HEIGHT = 3;
 
-    public static final int COURSE_WIDTH = scaleToCellSize(5);
-    public static final int COURSE_HEIGHT = scaleToCellSize(5);
+    public static final int COURSE_WIDTH = 5;
+    public static final int COURSE_HEIGHT = 5;
 
-    public static final int FOODZONE_WIDTH = scaleToCellSize(2);
-    public static final int FOODZONE_HEIGHT = scaleToCellSize(2);
+    public static final int FOODZONE_WIDTH = 2;
+    public static final int FOODZONE_HEIGHT = 2;
 
-    public static final int RECREATIONAL_WIDTH = scaleToCellSize(3);
-    public static final int RECREATIONAL_HEIGHT = scaleToCellSize(4);
+    public static final int RECREATIONAL_WIDTH = 3;
+    public static final int RECREATIONAL_HEIGHT = 4;
 
-    public static final int NATURE_WIDTH = scaleToCellSize(4);
-    public static final int NATURE_HEIGHT = scaleToCellSize(5);
+    public static final int NATURE_WIDTH = 4;
+    public static final int NATURE_HEIGHT = 5;
 }
