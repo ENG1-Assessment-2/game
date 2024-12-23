@@ -1,0 +1,44 @@
+{
+  "leaderboard": [
+    {
+      "playerName": "Mike Freeman",
+      "score": 1900
+    },
+    {
+      "playerName": "Charlie",
+      "score": 1800
+    },
+    {
+      "playerName": "Jacob",
+      "score": 1750
+    },
+    {
+      "playerName": "Hasan",
+      "score": 1650
+    },
+    {
+      "playerName": "Huzaifa",
+      "score": 1600
+    },
+    {
+      "playerName": "John Doe",
+      "score": 1300
+    },
+    {
+      "playerName": "Isaac",
+      "score": 1200
+    },
+    {
+      "playerName": "Alex",
+      "score": 1100
+    },
+    {
+      "playerName": "Joe",
+      "score": 1050
+    },
+    {
+      "playerName": "Konstantinos",
+      "score": 1000
+    }
+  ]
+}
