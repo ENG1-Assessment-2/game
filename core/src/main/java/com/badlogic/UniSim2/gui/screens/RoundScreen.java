@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class RoundScreen extends GameScreen {
 
@@ -22,6 +23,7 @@ public class RoundScreen extends GameScreen {
     private final Round round;
     private final Menu menu;
     private final Map map;
+    private final SpriteBatch batch;
 
     public RoundScreen(Round round, PlayScreenCallback callback) {
         super();
@@ -29,6 +31,7 @@ public class RoundScreen extends GameScreen {
         this.callback = callback;
         this.map = new Map(stage, round);
         this.menu = new Menu(stage, round);
+        this.batch = new SpriteBatch();
         SoundManager.playMusic();
     }
 
@@ -42,6 +45,10 @@ public class RoundScreen extends GameScreen {
 
         ScreenUtils.clear(Consts.BACKGROUND_COLOR);
         super.render(delta);
+        
+        batch.begin();
+        round.render(batch);
+        batch.end();
     }
 
     private void input() {
