@@ -47,8 +47,9 @@ public class RoundScreen extends GameScreen {
     private void input() {
         Vector2 mousePos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
         boolean clicked = Gdx.input.isButtonJustPressed(Input.Buttons.LEFT);
+        boolean rightClicked = Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT);
         viewport.unproject(mousePos);
-        map.input(mousePos, clicked);
+        map.input(mousePos, clicked, rightClicked);
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             round.togglePause();
