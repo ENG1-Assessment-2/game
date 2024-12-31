@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.badlogic.UniSim2.core.buildings.Building;
 import com.badlogic.UniSim2.core.buildings.BuildingPlacementException;
+import com.badlogic.UniSim2.core.buildings.BuildingRemovalException;
 import com.badlogic.UniSim2.core.buildings.BuildingType;
 import com.badlogic.UniSim2.resources.Consts;
 
@@ -41,6 +42,14 @@ public class Round {
 
     public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
         grid.placeBuilding(type, row, col);
+    }
+
+    public Building removeBuilding(int row, int col) throws BuildingRemovalException {
+        return grid.removeBuilding(row, col);
+    }
+
+    public boolean getIsBuildingAt(int row, int col) {
+        return grid.getIsBuildingAt(row, col);
     }
 
     public boolean getCanPlace(BuildingType type, int row, int col) {

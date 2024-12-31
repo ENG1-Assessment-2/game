@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.UniSim2.core.buildings.Building;
 import com.badlogic.UniSim2.core.buildings.BuildingPlacementException;
+import com.badlogic.UniSim2.core.buildings.BuildingRemovalException;
 import com.badlogic.UniSim2.core.buildings.BuildingType;
 import com.badlogic.UniSim2.core.buildings.Path;
 
@@ -26,7 +27,33 @@ public class Grid {
         return buildings;
     }
 
-    public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
+    public Building removeBuilding(int row, int col) throws BuildingRemovalException {
+        for (int i = 0; i < buildings.size(); i++) {
+            Building building = buildings.get(i);
+            if (isBuildingAt(building, row, col)) {
+                buildings.remove(i);
+                return building;
+            }
+        }
+        throw new BuildingRemovalException("There is no building at row " + row + " col " + col);
+    }
+
+    public boolean getIsBuildingAt(int row, int col) {
+        for (Building building : buildings) {
+            if (isBuildingAt(building, row, col)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isBuildingAt(Building building, int row, int col) {
+        boolean inRow = building.getRow() >= row && building.getRow() - building.getHeight() <= row;
+        boolean inCol = building.getCol() <= col && building.getCol() + building.getWidth() >= col;
+        return inRow && inCol;
+    }
+
+        public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
         if (!getCanPlace(type, row, col)) {
             throw new BuildingPlacementException("Cannot place building at row " + row + " and col " + col);
         }

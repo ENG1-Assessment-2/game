@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.UniSim2.core.Round;
 import com.badlogic.UniSim2.core.buildings.Building;
 import com.badlogic.UniSim2.core.buildings.BuildingPlacementException;
+import com.badlogic.UniSim2.core.buildings.BuildingRemovalException;
 import com.badlogic.UniSim2.core.buildings.BuildingType;
 import com.badlogic.UniSim2.resources.Assets;
 import com.badlogic.UniSim2.resources.Consts;
@@ -32,14 +33,58 @@ public class Map {
         stage.addActor(new GridActor());
     }
 
-    public void input(Vector2 mousePos, boolean clicked) {
-        BuildingType placingType = round.getSelectedBuildingType();
-
+    public void input(Vector2 mousePos, boolean clicked, boolean rightClicked) {
         if (mousePos.x < Consts.MENU_BAR_WIDTH) {
             return;
         }
 
+        BuildingType placingType = round.getSelectedBuildingType();
+        Vector2 placingBuildingPosition = getBuildingPosition(mousePos);
+        Vector2 placingBuildingGridPosition = getGridPosition(placingBuildingPosition);
+        updatePlacingBuildingImage(placingType, placingBuildingPosition, placingBuildingGridPosition);
+
         if (placingType == null) {
+            // not placing building
+            if (rightClicked) {
+                removeBuilding(placingBuildingGridPosition);
+            }
+        } else {
+            // placing building
+            if (clicked) {
+                placeBuilding(placingType, placingBuildingGridPosition);
+            }
+        }
+
+        updatePlacedBuildingImages();
+    }
+
+    private void placeBuilding(BuildingType type, Vector2 gridPosition) {
+        try {
+            round.placeBuilding(
+                    type,
+                    Math.round(gridPosition.y),
+                    Math.round(gridPosition.x)
+            );
+            SoundManager.playClick();
+            round.selectBuildingType(null);
+        } catch (BuildingPlacementException e) {
+        }
+    }
+
+    private void removeBuilding(Vector2 gridPosition) {
+        try {
+            round.removeBuilding(
+                    Math.round(gridPosition.y),
+                    Math.round(gridPosition.x)
+            );
+
+        } catch (BuildingRemovalException e) {
+        }
+    }
+
+    private void updatePlacingBuildingImage(BuildingType type, Vector2 position, Vector2 gridPosition) {
+        if (type == null) {
+            // remove placing building image
             if (placingBuildingImage != null) {
                 placingBuildingImage.remove();
                 placingBuildingImage = null;
@@ -47,39 +92,27 @@ public class Map {
             return;
         }
 
-        if (placingBuildingImage == null || !placingType.equals(placingBuildingImage.getType())) {
+        boolean wrongPlacingImage = placingBuildingImage == null || !type.equals(placingBuildingImage.getType());
+        if (wrongPlacingImage) {
+            // remove old placing building image
             if (placingBuildingImage != null) {
                 placingBuildingImage.remove();
             }
-            placingBuildingImage = new BuildingImage(placingType);
+            // add new placing building image
+            placingBuildingImage = new BuildingImage(type);
             stage.addActor(placingBuildingImage);
         }
 
-        Vector2 placingBuildingPosition = getBuildingPosition(mousePos);
-        Vector2 placingBuildingGridPosition = getGridPosition(placingBuildingPosition);
-        boolean canPlacePlacingBuilding = round.getCanPlace(
-                placingType,
-                Math.round(placingBuildingGridPosition.y),
-                Math.round(placingBuildingGridPosition.x)
-        );
-
-        placingBuildingImage.setDragging(!canPlacePlacingBuilding);
-        placingBuildingImage.updatePosition(placingBuildingPosition);
-
-        if (clicked) {
-            try {
-                round.placeBuilding(
-                        placingType,
-                        Math.round(placingBuildingGridPosition.y),
-                        Math.round(placingBuildingGridPosition.x)
-                );
-                SoundManager.playClick();
-                round.selectBuildingType(null);
-            } catch (BuildingPlacementException e) {
-            }
+        if (placingBuildingImage != null) {
+            // update placing building image
+            boolean canPlacePlacingBuilding = round.getCanPlace(
+                    type,
+                    Math.round(gridPosition.y),
+                    Math.round(gridPosition.x)
+            );
+            placingBuildingImage.setDragging(!canPlacePlacingBuilding);
+            placingBuildingImage.updatePosition(position);
         }
-
-        updatePlacedBuildingImages();
     }
 
     private Vector2 getBuildingPosition(Vector2 mousePos) {
