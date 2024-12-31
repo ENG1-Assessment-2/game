@@ -5,6 +5,7 @@ import java.util.List;
 import com.badlogic.UniSim2.core.buildings.Building;
 import com.badlogic.UniSim2.core.buildings.BuildingPlacementException;
 import com.badlogic.UniSim2.core.buildings.BuildingType;
+import com.badlogic.UniSim2.core.events.EventManager;
 import com.badlogic.UniSim2.resources.Consts;
 
 public class Round {
@@ -13,12 +14,14 @@ public class Round {
     private float elapsedTime;
     private boolean isPaused;
     private BuildingType selectedBuildingType;
+    private final EventManager eventManager;
 
     public Round() {
         this.grid = new Grid(38, 66);
         this.elapsedTime = 0;
         this.isPaused = false;
         this.selectedBuildingType = null;
+        this.eventManager = new EventManager(this);
 
         grid.placePath(38, 0, 2, 38);
         grid.placePath(38, 17, 2, 38);
@@ -32,6 +35,9 @@ public class Round {
     public void update(float delta) {
         if (elapsedTime < Consts.MAX_TIME && !isPaused) {
             elapsedTime += delta;
+            if (!eventManager.isFinished()){
+                eventManager.eventLauncher(elapsedTime);
+            }
         }
     }
 
@@ -74,4 +80,5 @@ public class Round {
     public boolean isOver() {
         return elapsedTime >= Consts.MAX_TIME;
     }
+
 }
