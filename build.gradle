@@ -6,7 +6,6 @@ plugins {
 }
 def checkstyleVersion = '10.4'
 
-buildscript {
   repositories {
     mavenCentral()
     maven { url 'https://s01.oss.sonatype.org' }
