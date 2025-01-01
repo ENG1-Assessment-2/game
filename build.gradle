@@ -17,9 +17,15 @@ buildscript {
     maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
   }
 
-  dependencies {
+configurations {
+  checkstyleRules 
+}
 
-
+dependencies {
+  checkstyleRules(
+    "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
+      transitive = false
+  }
 }
   
 tasks.test{
@@ -30,7 +36,10 @@ tasks.jacocoTestReport {
   dependsOn(tasks.test)
 }
 checkstyle {
-toolVersion "${checkstyleVersion}”
+  toolVersion "${checkstyleVersion}”
+  config = resources.text.fromArchiveEntry(
+    configurations.checkstyleRules, 'google_checks.xml’)
+}
 }
 allprojects {
 apply plugin: 'eclipse'
