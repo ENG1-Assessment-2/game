@@ -1,3 +1,11 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+    id 'jacoco'
+    id 'checkstyle'  
+}
+def checkstyleVersion = '10.4'
+
 buildscript {
   repositories {
     mavenCentral()
@@ -8,13 +16,6 @@ buildscript {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
   }
-plugins {
-    id 'java'
-    id 'checkstyle'
-    id 'jacoco'
-    id 'checkstyle'  
-}
-def checkstyleVersion = '10.4'
 
 configurations {
   checkstyleRules 
