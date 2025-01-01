@@ -13,15 +13,18 @@ jobs:
         os: [ubuntu-22.04, windows-2022, macos-12]
     runs-on: ${{matrix.os}}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up JDK ${{ matrix.java }}
+        -uses: actions/checkout@v3
+        -name: Set up JDK ${{ matrix.java }}
         uses: actions/setup-java@v3
-        with:
-          distribution: temurin
+          with:
           java-version: ${{ matrix.java }}
-          cache: gradle
+          distribution: temurin
+         -name: Build with Gradle
+         uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582
+         with: 
+           arguemtents: build
+           build-root-directory: core
+      
           
     # Configure Gradle for optimal use in GitHub Actions, including caching of downloaded dependencies.
     # See: https://github.com/gradle/actions/blob/main/setup-gradle/README.md
