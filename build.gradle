@@ -8,17 +8,31 @@ buildscript {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
   }
+  plugins {
+    'java'
+    checkstyle
+    jacoco
+  }  
+  
   dependencies {
 
 
-  }
+}
+  
+tasks.test{
+  useJUnitPlatform()
+}
+
+tasks.test{
+  finalizedBy(tasks.jacocoTestReport)
+}
+tasks.jacocoTestReport {
+  dependsOn(tasks.test)
 }
 
 allprojects {
   apply plugin: 'eclipse'
   apply plugin: 'idea'
-  apply plugin: 'java-library'
-  apply plugin: 'jacoco'
   // This allows you to "Build and run using IntelliJ IDEA", an option in IDEA's Settings.
   idea {
     module {
