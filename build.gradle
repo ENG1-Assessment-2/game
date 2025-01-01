@@ -4,7 +4,7 @@ plugins {
     id 'jacoco'
     id 'checkstyle'  
 }
-def checkstyleVersion = '10.4’
+def checkstyleVersion = '10.4'
 
 buildscript {
   repositories {
