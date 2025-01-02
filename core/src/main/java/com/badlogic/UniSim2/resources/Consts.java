@@ -112,8 +112,8 @@ public class Consts {
     public static final int FOODZONE_WIDTH = 2;
     public static final int FOODZONE_HEIGHT = 2;
 
-    public static final int RECREATIONAL_WIDTH = 3;
-    public static final int RECREATIONAL_HEIGHT = 4;
+    public static final int BAR_WIDTH = 3;
+    public static final int BAR_HEIGHT = 4;
 
     public static final int NATURE_WIDTH = 4;
     public static final int NATURE_HEIGHT = 5;

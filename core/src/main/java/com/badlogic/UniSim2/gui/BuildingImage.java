@@ -50,10 +50,10 @@ public class BuildingImage extends Image {
                 draggingTexture = Assets.foodZoneDraggingTexture;
                 collisionTexture = Assets.foodZoneCollisionTexture;
                 break;
-            case RECREATIONAL:
-                placedTexture = Assets.recreationalPlacedTexture;
-                draggingTexture = Assets.recreationalDraggingTexture;
-                collisionTexture = Assets.recreationalCollisionTexture;
+            case BAR:
+                placedTexture = Assets.barPlacedTexture;
+                draggingTexture = Assets.barDraggingTexture;
+                collisionTexture = Assets.barCollisionTexture;
                 break;
             case NATURE:
                 placedTexture = Assets.naturePlacedTexture;
@@ -82,8 +82,8 @@ public class BuildingImage extends Image {
             case FOODZONE:
                 setSize(Consts.FOODZONE_WIDTH * Consts.CELL_SIZE, Consts.FOODZONE_WIDTH * Consts.CELL_SIZE);
                 break;
-            case RECREATIONAL:
-                setSize(Consts.RECREATIONAL_WIDTH * Consts.CELL_SIZE, Consts.RECREATIONAL_HEIGHT * Consts.CELL_SIZE);
+            case BAR:
+                setSize(Consts.BAR_WIDTH * Consts.CELL_SIZE, Consts.BAR_HEIGHT * Consts.CELL_SIZE);
                 break;
             case NATURE:
                 setSize(Consts.NATURE_WIDTH * Consts.CELL_SIZE, Consts.NATURE_HEIGHT * Consts.CELL_SIZE);

@@ -4,12 +4,14 @@ import com.badlogic.UniSim2.core.Round;
 import com.badlogic.UniSim2.core.buildings.BuildingType;
 import com.badlogic.UniSim2.resources.Assets;
 import com.badlogic.UniSim2.resources.Consts;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 
 public class BuildingButton extends ImageButton {
 
@@ -21,13 +23,16 @@ public class BuildingButton extends ImageButton {
     private final BuildingType type;
     private final Round round;
     private final Label countLabel;
+    private final BuildingDescriptions buildingDescriptions;
+
 
     public BuildingButton(BuildingType type, Round round, int yPosition,
-            Skin skin, SelectionListener listener) {
+            Skin skin, SelectionListener listener, BuildingDescriptions buildingDescriptions) {
 
         super(createButtonStyle(type));
         this.type = type;
         this.round = round;
+        this.buildingDescriptions = buildingDescriptions;
         setSize(Consts.BUILDING_BUTTON_WIDTH, Consts.BUILDING_BUTTON_HEIGHT);
         setPosition(Consts.BUILDING_BUTTON_X_BOUNDARY, yPosition);
         this.countLabel = new Label("0", skin);
@@ -39,6 +44,18 @@ public class BuildingButton extends ImageButton {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 listener.onBuildingSelected(type);
+            }
+        });
+        addListener(new InputListener() {
+            @Override
+            public boolean mouseMoved(InputEvent event, float x, float y) {
+                buildingDescriptions.showDescription(type);
+                return true;
+            }
+
+            @Override
+            public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
+                buildingDescriptions.hideDescription();
             }
         });
     }

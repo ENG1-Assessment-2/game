@@ -11,7 +11,7 @@ public class TimerLabel extends Label {
     private final Round round;
 
     public TimerLabel(Round round, Skin skin) {
-        super("00:00", skin);
+        super("0.0 years", skin);
         this.round = round;
 
         setFontScale(3);
@@ -27,8 +27,8 @@ public class TimerLabel extends Label {
     }
 
     private String formatTime(float time) {
-        int minutes = (int) (time / 60);
-        int seconds = (int) (time % 60);
-        return String.format("%02d:%02d", minutes, seconds);
+        // Convert time from seconds to years (300 seconds = 3 years)
+        float years = (time / 300) * 3;
+        return String.format("%.1f years", years);
     }
 }

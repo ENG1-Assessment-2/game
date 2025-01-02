@@ -15,6 +15,7 @@ public class Textbox {
     private final GlyphLayout layout;
     private final SpriteBatch batch;
     private float width;
+    private boolean visible;
 
     public Textbox(String text, float x, float y, float width) {
         this.text = text;
@@ -26,9 +27,12 @@ public class Textbox {
         this.shapeRenderer = new ShapeRenderer();
         this.layout = new GlyphLayout();
         this.batch = new SpriteBatch();
+        this.visible = false;
     }
 
     public void render() {
+        if (!visible) return;
+        
         // Calculate the width and height of the text
         layout.setText(font, text, Color.BLACK, width, -1, true);
         float height = layout.height + 20;
@@ -53,6 +57,10 @@ public class Textbox {
         this.width = width;
     }
 
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+    
     public void dispose() {
         font.dispose();
         shapeRenderer.dispose();

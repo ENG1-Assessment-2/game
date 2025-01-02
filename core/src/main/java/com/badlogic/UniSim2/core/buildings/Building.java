@@ -21,7 +21,7 @@ public abstract class Building {
     }
 
     public int getCol() {
-        return col;
+        return col; 
     }
 
     public int getWidth() {
