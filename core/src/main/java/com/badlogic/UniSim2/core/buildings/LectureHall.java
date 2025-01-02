@@ -10,4 +10,9 @@ class LectureHall extends Building {
                 BuildingType.LECTUREHALL
         );
     }
+
+    @Override
+    public int getCost() {
+        return 500 * 1000;
+    }
 }

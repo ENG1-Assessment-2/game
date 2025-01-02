@@ -10,4 +10,9 @@ class Bar extends Building {
                 BuildingType.BAR
         );
     }
+
+    @Override
+    public int getCost() {
+        return 150 * 1000;
+    }
 }

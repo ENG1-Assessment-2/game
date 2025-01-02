@@ -42,4 +42,6 @@ public abstract class Building {
 
         return rowOverlaps && colOverlaps;
     }
+
+    public abstract int getCost();
 }

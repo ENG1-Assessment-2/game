@@ -10,4 +10,9 @@ class Nature extends Building {
                 BuildingType.NATURE
         );
     }
+
+    @Override
+    public int getCost() {
+        return 50 * 1000;
+    }
 }
