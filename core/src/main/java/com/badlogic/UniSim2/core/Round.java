@@ -53,6 +53,11 @@ public class Round {
     }
 
     public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
+        int buildingCost = type.create(0, 0).getCost();
+        if (funds < buildingCost) {
+            throw new BuildingPlacementException("Not enough funds to place building");
+        }
+        funds -= buildingCost;
         grid.placeBuilding(type, row, col);
     }
 
@@ -66,6 +71,10 @@ public class Round {
 
     public boolean getCanPlace(BuildingType type, int row, int col) {
         return grid.getCanPlace(type, row, col);
+    }
+
+    public boolean getCanAfford(BuildingType type) {
+        return funds >= type.create(0, 0).getCost();
     }
 
     public int getBuildingCount(BuildingType type) {
