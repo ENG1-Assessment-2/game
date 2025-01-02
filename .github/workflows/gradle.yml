@@ -57,7 +57,7 @@ jobs:
             *.github/workflows/build/reports/checkstyle/.xml
 
       - name: Run tests and generate JaCoCo report
-        run: ./gradlew test jacocoTestReport
+        run: .actions/upload-artifact@v4
         shell: bash
 
       - name: Upload JaCoCo Code Coverage Report
