@@ -12,6 +12,11 @@ class Accommodation extends Building {
     }
 
     @Override
+    public String getName() {
+        return "Accommodation";
+    }
+
+    @Override
     public int getCost() {
         return 200 * 1000;
     }

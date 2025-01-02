@@ -12,6 +12,11 @@ class FoodZone extends Building {
     }
 
     @Override
+    public String getName() {
+        return "Food Zone";
+    }
+
+    @Override
     public int getCost() {
         return 250 * 1000;
     }

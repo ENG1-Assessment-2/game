@@ -12,6 +12,11 @@ class LectureHall extends Building {
     }
 
     @Override
+    public String getName() {
+        return "Lecture Hall";
+    }
+
+    @Override
     public int getCost() {
         return 500 * 1000;
     }

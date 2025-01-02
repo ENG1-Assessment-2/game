@@ -12,6 +12,11 @@ class Nature extends Building {
     }
 
     @Override
+    public String getName() {
+        return "Nature";
+    }
+
+    @Override
     public int getCost() {
         return 50 * 1000;
     }

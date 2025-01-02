@@ -7,6 +7,11 @@ public class Path extends Building {
     }
 
     @Override
+    public String getName() {
+        return "Path";
+    }
+
+    @Override
     public int getCost() {
         return 0;
     }

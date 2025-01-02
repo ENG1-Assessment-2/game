@@ -12,6 +12,11 @@ class Bar extends Building {
     }
 
     @Override
+    public String getName() {
+        return "Bar";
+    }
+
+    @Override
     public int getCost() {
         return 150 * 1000;
     }
