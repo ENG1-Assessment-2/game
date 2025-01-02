@@ -14,6 +14,7 @@ public class Round {
     private float elapsedTime;
     private boolean isPaused;
     private BuildingType selectedBuildingType;
+    private Building movingBuilding;
     private int funds;
     private float timeSinceLastPay;
 
@@ -72,6 +73,55 @@ public class Round {
         }
         funds -= demolishCost;
         return grid.removeBuilding(row, col);
+    }
+
+    public void selectBuildingToMove(int row, int col) {
+        if (movingBuilding != null) {
+            return;
+        }
+
+        try {
+            Building building = grid.getBuildingAt(row, col);
+            movingBuilding = building;
+
+            grid.removeBuilding(row, col);
+        } catch (BuildingRemovalException e) {
+        }
+    }
+
+    public void cancelMoveBuilding() {
+        if (movingBuilding == null) {
+            return;
+        }
+
+        try {
+            grid.placeBuilding(movingBuilding.getType(), movingBuilding.getRow(), movingBuilding.getCol());
+            movingBuilding = null;
+        } catch (BuildingPlacementException e) {
+        }
+    }
+
+    public boolean getIsMovingBuilding() {
+        return movingBuilding != null;
+    }
+
+    public Building getMovingBuilding() {
+        return movingBuilding;
+    }
+
+    public void moveBuilding(int row, int col) throws BuildingPlacementException {
+        if (movingBuilding == null) {
+            return;
+        }
+
+        int moveCost = movingBuilding.getMoveCost();
+        if (funds < moveCost) {
+            throw new BuildingPlacementException("Not enough funds to move building");
+        }
+
+        funds -= moveCost;
+        grid.moveBuilding(movingBuilding, row, col);
+        movingBuilding = null;
     }
 
     public boolean getIsBuildingAt(int row, int col) {

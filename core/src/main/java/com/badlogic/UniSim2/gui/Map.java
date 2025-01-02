@@ -21,12 +21,14 @@ public class Map {
 
     final private ArrayList<BuildingImage> placedBuildingImages;
     private BuildingImage placingBuildingImage;
+    private BuildingImage movingBuildingImage;
 
     public Map(Stage stage, Round round) {
         this.stage = stage;
         this.round = round;
 
         this.placingBuildingImage = null;
+        this.movingBuildingImage = null;
         this.placedBuildingImages = new ArrayList<>();
 
         addBackground();
@@ -45,17 +47,47 @@ public class Map {
 
         if (placingType == null) {
             // not placing building
+            if (clicked) {
+                handleBuildingMovement(placingBuildingGridPosition);
+            }
             if (rightClicked) {
-                removeBuilding(placingBuildingGridPosition);
+                if (round.getIsMovingBuilding()) {
+                    round.cancelMoveBuilding();
+                } else {
+                    removeBuilding(placingBuildingGridPosition);
+                }
             }
         } else {
             // placing building
+            if (rightClicked) {
+                round.selectBuildingType(null);
+            }
             if (clicked) {
                 placeBuilding(placingType, placingBuildingGridPosition);
             }
+            round.cancelMoveBuilding();
         }
 
         updatePlacedBuildingImages();
+        updateMovingBuildingImage(placingBuildingGridPosition);
+    }
+
+    private void handleBuildingMovement(Vector2 gridPosition) {
+        if (round.getIsMovingBuilding()) {
+            try {
+                round.moveBuilding(
+                        Math.round(gridPosition.y),
+                        Math.round(gridPosition.x)
+                );
+            } catch (BuildingPlacementException e) {
+            }
+
+        } else {
+            round.selectBuildingToMove(
+                    Math.round(gridPosition.y),
+                    Math.round(gridPosition.x)
+            );
+        }
     }
 
     private void placeBuilding(BuildingType type, Vector2 gridPosition) {
@@ -157,14 +189,37 @@ public class Map {
 
         for (Building building : round.getPlacedBuildings()) {
             BuildingImage image = new BuildingImage(building.getType());
-            image.setPlaced();
-
             float screenX = (building.getCol() * Consts.CELL_SIZE) + Consts.MENU_BAR_WIDTH;
             float screenY = Consts.WORLD_HEIGHT - (building.getRow() * Consts.CELL_SIZE);
-
+            image.setPlaced();
             image.setPosition(screenX, screenY);
-            stage.addActor(image);
             placedBuildingImages.add(image);
+            stage.addActor(image);
         }
+    }
+
+    private void updateMovingBuildingImage(Vector2 gridPosition) {
+        if (movingBuildingImage != null) {
+            movingBuildingImage.remove();
+            movingBuildingImage = null;
+        }
+
+        Building movingBuilding = round.getMovingBuilding();
+        if (movingBuilding == null) {
+            return;
+        }
+
+        movingBuildingImage = new BuildingImage(movingBuilding.getType());
+        float screenX = (gridPosition.x * Consts.CELL_SIZE) + Consts.MENU_BAR_WIDTH;
+        float screenY = Consts.WORLD_HEIGHT - (gridPosition.y * Consts.CELL_SIZE);
+        boolean canPlace = round.getCanPlace(
+                movingBuilding.getType(),
+                Math.round(gridPosition.y),
+                Math.round(gridPosition.x)
+        );
+
+        movingBuildingImage.setDragging(!canPlace);
+        movingBuildingImage.setPosition(screenX, screenY);
+        stage.addActor(movingBuildingImage);
     }
 }
