@@ -98,9 +98,33 @@ public class Round {
         int numberOfFoodZones = grid.getBuildingCount(BuildingType.FOODZONE);
         s += numberOfFoodZones * 50;
 
-        // each bar within 5 tiles of an accommodation removes 100
-        // each within 4 tiles of a lecture hall adds 60
-        // each nature adjacent to an accommodation adds 30
+        // considering the distance between buildings
+        for (Building bA : grid.getPlacedBuildings()) {
+            for (Building bB : grid.getPlacedBuildings()) {
+
+                // // each bar within 5 tiles of an accommodation removes 100
+                if (bA.getType() == BuildingType.BAR && bB.getType() == BuildingType.ACCOMMODATION) {
+                    if (grid.getBuildingsAreWithinRadius(bA, bB, 5)) {
+                        s -= 100;
+                    }
+                }
+
+                // // each bar within 4 tiles of a lecture hall adds 60
+                if (bA.getType() == BuildingType.BAR && bB.getType() == BuildingType.LECTUREHALL) {
+                    if (grid.getBuildingsAreWithinRadius(bA, bB, 4)) {
+                        s += 60;
+                    }
+                }
+
+                // // each nature adjacent to an accommodation adds 30
+                if (bA.getType() == BuildingType.NATURE && bB.getType() == BuildingType.ACCOMMODATION) {
+                    if (grid.getBuildingsAreWithinRadius(bA, bB, 1)) {
+                        s += 30;
+                    }
+                }
+            }
+        }
+
         // similar numbers of building type increase satisfaction
         return s;
     }
