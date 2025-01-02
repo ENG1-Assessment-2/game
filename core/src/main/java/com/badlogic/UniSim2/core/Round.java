@@ -1,7 +1,14 @@
 package com.badlogic.UniSim2.core;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.badlogic.UniSim2.core.achievements.AcademicArchitect;
+import com.badlogic.UniSim2.core.achievements.Achievement;
+import com.badlogic.UniSim2.core.achievements.FirstBuilding;
+import com.badlogic.UniSim2.core.achievements.GreenCampus;
 import com.badlogic.UniSim2.core.buildings.Building;
 import com.badlogic.UniSim2.core.buildings.BuildingPlacementException;
 import com.badlogic.UniSim2.core.buildings.BuildingRemovalException;
@@ -10,6 +17,12 @@ import com.badlogic.UniSim2.resources.Consts;
 
 public class Round {
 
+    private final Set<Achievement> ALL_ACHIEVEMENTS = new HashSet<>(Arrays.asList(
+            FirstBuilding.getInstance(),
+            AcademicArchitect.getInstance(),
+            GreenCampus.getInstance()
+    ));
+
     private final Grid grid;
     private float elapsedTime;
     private boolean isPaused;
@@ -17,6 +30,7 @@ public class Round {
     private Building movingBuilding;
     private int funds;
     private float timeSinceLastPay;
+    private final Set<Achievement> completedAchievements;
 
     public Round() {
         this.grid = new Grid(38, 66);
@@ -24,6 +38,8 @@ public class Round {
         this.isPaused = false;
         this.selectedBuildingType = null;
         this.funds = 500000;
+        this.timeSinceLastPay = 0;
+        this.completedAchievements = new HashSet<>();
 
         grid.placePath(38, 0, 2, 38);
         grid.placePath(38, 17, 2, 38);
@@ -46,6 +62,12 @@ public class Round {
             timeSinceLastPay = 0;
         } else {
             timeSinceLastPay += delta;
+        }
+
+        for (Achievement achievement : ALL_ACHIEVEMENTS) {
+            if (!completedAchievements.contains(achievement) && achievement.getCompleted(this)) {
+                completedAchievements.add(achievement);
+            }
         }
     }
 
@@ -166,5 +188,13 @@ public class Round {
 
     public int getFunds() {
         return funds;
+    }
+
+    public Set<Achievement> getCompletedAchievements() {
+        return completedAchievements;
+    }
+
+    public Set<Achievement> getAllAchievements() {
+        return ALL_ACHIEVEMENTS;
     }
 }
