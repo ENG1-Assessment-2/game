@@ -28,7 +28,7 @@ public class EndScreen extends GameScreen {
         this.skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         this.scoreLabel = createScoreLabel(score);
         stage.addActor(scoreLabel);
-        SoundManager.stopMusic();
+        SoundManager.getInstance().stopMusic();
     }
 
     private Label createScoreLabel(int score) {

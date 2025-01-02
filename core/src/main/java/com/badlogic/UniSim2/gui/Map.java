@@ -65,7 +65,7 @@ public class Map {
                     Math.round(gridPosition.y),
                     Math.round(gridPosition.x)
             );
-            SoundManager.playClick();
+            SoundManager.getInstance().playClick();
             round.selectBuildingType(null);
         } catch (BuildingPlacementException e) {
         }

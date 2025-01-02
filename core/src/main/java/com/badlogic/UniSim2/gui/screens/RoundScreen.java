@@ -29,7 +29,7 @@ public class RoundScreen extends GameScreen {
         this.callback = callback;
         this.map = new Map(stage, round);
         this.menu = new Menu(stage, round);
-        SoundManager.playMusic();
+        SoundManager.getInstance().playMusic();
     }
 
     @Override
