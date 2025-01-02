@@ -2,19 +2,51 @@ package com.badlogic.UniSim2.resources;
 
 public class SoundManager {
 
-    private SoundManager(){};
+    private static SoundManager instance;
+    private boolean muted;
 
-    public static void playMusic(){
-        Assets.music.setVolume(.5f);
+    private SoundManager() {
+        this.muted = false;
+    }
+
+    public static SoundManager getInstance() {
+        if (instance == null) {
+            instance = new SoundManager();
+        }
+        return instance;
+    }
+
+    public void playMusic() {
         Assets.music.setLooping(true);
         Assets.music.play();
     }
 
-    public static void stopMusic(){
+    public void stopMusic() {
         Assets.music.stop();
     }
 
-    public static void playClick(){
+    public void playClick() {
+        if (muted) {
+            return;
+        }
         Assets.click.play();
+    }
+
+    public void toggleMute() {
+        if (muted) {
+            unmute();
+        } else {
+            mute();
+        }
+    }
+
+    private void mute() {
+        Assets.music.setVolume(0);
+        muted = true;
+    }
+
+    private void unmute() {
+        Assets.music.setVolume(.5f);
+        muted = false;
     }
 }
