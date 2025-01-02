@@ -52,4 +52,10 @@ public abstract class Building {
     public int getMoveCost() {
         return getCost() / 2;
     }
+
+    public abstract String getName();
+
+    public String getDescription() {
+        return getName() + "\n" + "Cost: " + getCost() + "\n" + "Demolish: " + getDemolishCost() + "\n" + "Move: " + getMoveCost();
+    }
 }
