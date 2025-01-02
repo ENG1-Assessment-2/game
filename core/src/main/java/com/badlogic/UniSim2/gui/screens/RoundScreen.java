@@ -1,6 +1,5 @@
 package com.badlogic.UniSim2.gui.screens;
 
-import com.badlogic.UniSim2.core.Achievements;
 import com.badlogic.UniSim2.core.Round;
 import com.badlogic.UniSim2.gui.Map;
 import com.badlogic.UniSim2.gui.Menu;
@@ -8,8 +7,6 @@ import com.badlogic.UniSim2.resources.Consts;
 import com.badlogic.UniSim2.resources.SoundManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -25,9 +22,6 @@ public class RoundScreen extends GameScreen {
     private final Round round;
     private final Menu menu;
     private final Map map;
-    private final Achievements achievements;
-    private final SpriteBatch batch;
-    private final ShapeRenderer shapeRenderer;
 
     public RoundScreen(Round round, PlayScreenCallback callback) {
         super();
@@ -35,9 +29,6 @@ public class RoundScreen extends GameScreen {
         this.callback = callback;
         this.map = new Map(stage, round);
         this.menu = new Menu(stage, round);
-        this.achievements = new Achievements(round);
-        this.batch = new SpriteBatch();
-        this.shapeRenderer = new ShapeRenderer();
         SoundManager.playMusic();
     }
 
@@ -51,8 +42,6 @@ public class RoundScreen extends GameScreen {
 
         ScreenUtils.clear(Consts.BACKGROUND_COLOR);
         super.render(delta);
-
-        achievements.render(batch, shapeRenderer);
     }
 
     private void input() {
@@ -65,12 +54,6 @@ public class RoundScreen extends GameScreen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             round.togglePause();
         }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
-            SoundManager.toggleMute();
-        }
-
-        achievements.update();
     }
 
     private void update() {
@@ -80,13 +63,5 @@ public class RoundScreen extends GameScreen {
         if (round.isOver()) {
             callback.onGameEnd();
         }
-    }
-
-    @Override
-    public void dispose() {
-        batch.dispose();
-        shapeRenderer.dispose();
-        achievements.dispose();
-        super.dispose();
     }
 }

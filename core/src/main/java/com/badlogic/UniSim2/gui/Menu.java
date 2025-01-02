@@ -18,21 +18,18 @@ public class Menu {
     private final Array<BuildingButton> buildingButtons;
     private final Round round;
     private final Stage stage;
-    private final BuildingDescriptions buildingDescriptions;
 
     public Menu(Stage stage, Round round) {
         this.stage = stage;
         this.round = round;
         this.skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
         this.buildingButtons = new Array<>();
-        this.buildingDescriptions = new BuildingDescriptions(skin);
 
         Image menuBar = createMenuBar();
         this.timerLabel = new TimerLabel(round, skin);
 
         stage.addActor(menuBar);
         stage.addActor(timerLabel);
-        stage.addActor(buildingDescriptions.getDescriptionTextboxActor());
         createBuildingButtons();
     }
 
@@ -61,8 +58,7 @@ public class Menu {
                     round,
                     yPosition - buttonGap,
                     skin,
-                    this::handleBuildingSelected,
-                    buildingDescriptions
+                    this::handleBuildingSelected
             );
 
             buildingButtons.add(button);

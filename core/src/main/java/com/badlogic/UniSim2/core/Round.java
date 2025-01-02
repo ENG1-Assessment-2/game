@@ -14,14 +14,12 @@ public class Round {
     private float elapsedTime;
     private boolean isPaused;
     private BuildingType selectedBuildingType;
-    private Achievements achievements;
 
     public Round() {
         this.grid = new Grid(38, 66);
         this.elapsedTime = 0;
         this.isPaused = false;
         this.selectedBuildingType = null;
-        achievements = new Achievements(this);
 
         grid.placePath(38, 0, 2, 38);
         grid.placePath(38, 17, 2, 38);
@@ -44,7 +42,6 @@ public class Round {
 
     public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
         grid.placeBuilding(type, row, col);
-        achievements.update();
     }
 
     public Building removeBuilding(int row, int col) throws BuildingRemovalException {
