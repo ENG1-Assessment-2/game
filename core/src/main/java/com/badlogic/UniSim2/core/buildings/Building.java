@@ -44,4 +44,8 @@ public abstract class Building {
     }
 
     public abstract int getCost();
+
+    public int getDemolishCost() {
+        return getCost() / 4;
+    }
 }

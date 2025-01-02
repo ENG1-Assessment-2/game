@@ -62,6 +62,15 @@ public class Round {
     }
 
     public Building removeBuilding(int row, int col) throws BuildingRemovalException {
+        Building building = grid.getBuildingAt(row, col);
+        if (building == null) {
+            throw new BuildingRemovalException("There is no building at row " + row + " col " + col);
+        }
+        int demolishCost = building.getDemolishCost();
+        if (funds < demolishCost) {
+            throw new BuildingRemovalException("Not enough funds to remove building");
+        }
+        funds -= demolishCost;
         return grid.removeBuilding(row, col);
     }
 
