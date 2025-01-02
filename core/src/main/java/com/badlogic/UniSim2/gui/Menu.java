@@ -69,7 +69,7 @@ public class Menu {
     }
 
     private void handleBuildingSelected(BuildingType type) {
-        SoundManager.playClick();
+        SoundManager.getInstance().playClick();
         round.selectBuildingType(type);
     }
 }
