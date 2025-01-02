@@ -47,13 +47,22 @@ public class Grid {
         return false;
     }
 
+    public Building getBuildingAt(int row, int col) {
+        for (Building building : buildings) {
+            if (isBuildingAt(building, row, col)) {
+                return building;
+            }
+        }
+        return null;
+    }
+
     private boolean isBuildingAt(Building building, int row, int col) {
         boolean inRow = building.getRow() >= row && building.getRow() - building.getHeight() <= row;
         boolean inCol = building.getCol() <= col && building.getCol() + building.getWidth() >= col;
         return inRow && inCol;
     }
 
-        public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
+    public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
         if (!getCanPlace(type, row, col)) {
             throw new BuildingPlacementException("Cannot place building at row " + row + " and col " + col);
         }
