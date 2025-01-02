@@ -15,4 +15,9 @@ public class Path extends Building {
     public int getCost() {
         return 0;
     }
+
+    @Override
+    public String getDescription() {
+        return getName();
+    }
 }
