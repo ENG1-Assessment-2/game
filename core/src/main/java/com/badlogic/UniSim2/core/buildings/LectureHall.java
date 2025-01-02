@@ -28,6 +28,7 @@ class LectureHall extends Building {
         d += "\nDemolish: " + getDemolishCost();
         d += "\nMove: " + getMoveCost();
         d += "\nScore: 100";
+        d += "\n <=4 tiles from bar: +60";
         return d;
     }
 }

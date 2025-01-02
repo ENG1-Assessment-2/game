@@ -28,6 +28,7 @@ class Nature extends Building {
         d += "\nDemolish: " + getDemolishCost();
         d += "\nMove: " + getMoveCost();
         d += "\nScore: 10";
+        d += "\n next to accommodation: +30";
         return d;
     }
 }
