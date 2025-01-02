@@ -88,10 +88,9 @@ public class Consts {
     public static final int FUNDS_Y = WORLD_HEIGHT - scaleToCellSize(5);
     public static final Color FUNDS_COLOR = new Color(Color.BLACK);
 
-    public static final int SCORE_LABEL_WIDTH = scaleToCellSize(6);
-    public static final int SCORE_LABEL_HEIGHT = scaleToCellSize(2);
-    public static final int SCORE_LABEL_X = (WORLD_WIDTH / 2) - scaleToCellSize(4);
-    public static final int SCORE_LABEL_Y = (WORLD_HEIGHT / 2) - scaleToCellSize(4);
+    public static final int SATISFACTION_X = scaleToCellSize(4);
+    public static final int SATISFACTION_Y = WORLD_HEIGHT - scaleToCellSize(9);
+    public static final Color SATISFACTION_COLOR = new Color(Color.BLACK);
 
     public static final Color COUNT_COLOR = new Color(Color.BLACK);
     public static final int COUNT_SIZE = 2;
