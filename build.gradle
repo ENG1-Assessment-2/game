@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'checkstyle'  
+    id 'java-library'
 }
 def checkstyleVersion = '10.4'
 
