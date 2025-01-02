@@ -1,5 +1,6 @@
 package com.badlogic.UniSim2.core;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -37,7 +38,7 @@ public class Round {
         this.elapsedTime = 0;
         this.isPaused = false;
         this.selectedBuildingType = null;
-        this.funds = 500000;
+        this.funds = 5000000;
         this.timeSinceLastPay = 0;
         this.completedAchievements = new HashSet<>();
 
@@ -69,6 +70,81 @@ public class Round {
                 completedAchievements.add(achievement);
             }
         }
+    }
+
+    public int getStudentSatisfaction() {
+        return (int) (getStudentSatisfactionFromBuildings() * getDiversityFactor());
+    }
+
+    private int getStudentSatisfactionFromBuildings() {
+        int s = 0;
+
+        // each lecture hall adds 100
+        int numberOfLectureHalls = grid.getBuildingCount(BuildingType.LECTUREHALL);
+        s += numberOfLectureHalls * 100;
+
+        // each accommodation adds 40
+        int numberOfAccommodations = grid.getBuildingCount(BuildingType.ACCOMMODATION);
+        s += numberOfAccommodations * 40;
+
+        // each bar adds 60
+        int numberOfBars = grid.getBuildingCount(BuildingType.BAR);
+        s += numberOfBars * 60;
+
+        // each nature adds 10
+        int numberOfNatures = grid.getBuildingCount(BuildingType.NATURE);
+        s += numberOfNatures * 10;
+
+        // each food zone adds 50
+        int numberOfFoodZones = grid.getBuildingCount(BuildingType.FOODZONE);
+        s += numberOfFoodZones * 50;
+
+        // considering the distance between buildings
+        for (Building bA : grid.getPlacedBuildings()) {
+            for (Building bB : grid.getPlacedBuildings()) {
+
+                // each bar within 5 tiles of an accommodation removes 100
+                if (bA.getType() == BuildingType.BAR && bB.getType() == BuildingType.ACCOMMODATION) {
+                    if (grid.getBuildingsAreWithinRadius(bA, bB, 5)) {
+                        s -= 100;
+                    }
+                }
+
+                // each bar within 4 tiles of a lecture hall adds 60
+                if (bA.getType() == BuildingType.BAR && bB.getType() == BuildingType.LECTUREHALL) {
+                    if (grid.getBuildingsAreWithinRadius(bA, bB, 4)) {
+                        s += 60;
+                    }
+                }
+
+                // each nature adjacent to an accommodation adds 30
+                if (bA.getType() == BuildingType.NATURE && bB.getType() == BuildingType.ACCOMMODATION) {
+                    if (grid.getBuildingsAreWithinRadius(bA, bB, 1)) {
+                        s += 30;
+                    }
+                }
+            }
+        }
+
+        return s;
+    }
+
+    private double getDiversityFactor() {
+        List<Integer> buildingCounts = new ArrayList<>();
+        for (BuildingType type : BuildingType.values()) {
+            buildingCounts.add(grid.getBuildingCount(type));
+        }
+
+        float mean = grid.getPlacedBuildings().size() / BuildingType.values().length;
+        double variance = 0.0;
+        for (int count : buildingCounts) {
+            variance += Math.pow(count - mean, 2);
+        }
+        variance /= BuildingType.values().length;
+        double maxVariance = Math.pow(grid.getPlacedBuildings().size() - mean, 2);
+        double normalisedVariance = 1.0 - (variance / maxVariance);
+        normalisedVariance = Math.max(0, normalisedVariance);
+        return normalisedVariance;
     }
 
     public List<Building> getPlacedBuildings() {

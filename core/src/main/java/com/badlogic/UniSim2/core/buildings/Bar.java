@@ -20,4 +20,14 @@ class Bar extends Building {
     public int getCost() {
         return 150 * 1000;
     }
+
+    @Override
+    public String getDescription() {
+        String d = "Bar for students to drink at.";
+        d += "\nCost: " + getCost();
+        d += "\nDemolish: " + getDemolishCost();
+        d += "\nMove: " + getMoveCost();
+        d += "\nScore: 60";
+        return d;
+    }
 }

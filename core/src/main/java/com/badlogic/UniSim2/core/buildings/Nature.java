@@ -20,4 +20,15 @@ class Nature extends Building {
     public int getCost() {
         return 50 * 1000;
     }
+
+    @Override
+    public String getDescription() {
+        String d = "Nature for students to wander amongst.";
+        d += "\nCost: " + getCost();
+        d += "\nDemolish: " + getDemolishCost();
+        d += "\nMove: " + getMoveCost();
+        d += "\nScore: 10";
+        d += "\n next to accommodation: +30";
+        return d;
+    }
 }

@@ -3,6 +3,7 @@ package com.badlogic.UniSim2.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.UniSim2.core.buildings.Area;
 import com.badlogic.UniSim2.core.buildings.Building;
 import com.badlogic.UniSim2.core.buildings.BuildingPlacementException;
 import com.badlogic.UniSim2.core.buildings.BuildingRemovalException;
@@ -114,5 +115,10 @@ public class Grid {
 
     public void placePath(int row, int col, int width, int height) {
         paths.add(new Path(width, height, row, col));
+    }
+
+    public boolean getBuildingsAreWithinRadius(Building a, Building b, int radius) {
+        Building area = new Area(a.getWidth() + (2 * radius), a.getHeight() + (2 * radius), a.getRow() + radius, a.getCol() - radius);
+        return area.overlaps(b.getType(), b.getRow(), b.getCol());
     }
 }

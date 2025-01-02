@@ -20,4 +20,15 @@ class FoodZone extends Building {
     public int getCost() {
         return 250 * 1000;
     }
+
+
+    @Override
+    public String getDescription() {
+        String d = "Foodzone for students to eat in.";
+        d += "\nCost: " + getCost();
+        d += "\nDemolish: " + getDemolishCost();
+        d += "\nMove: " + getMoveCost();
+        d += "\nScore: 50";
+        return d;
+    }
 }

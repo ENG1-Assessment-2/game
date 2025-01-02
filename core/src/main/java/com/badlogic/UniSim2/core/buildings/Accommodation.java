@@ -20,4 +20,15 @@ class Accommodation extends Building {
     public int getCost() {
         return 200 * 1000;
     }
+
+    @Override
+    public String getDescription() {
+        String d = "Accommodation for students and staff.";
+        d += "\nCost: " + getCost();
+        d += "\nDemolish: " + getDemolishCost();
+        d += "\nMove: " + getMoveCost();
+        d += "\nScore: 40";
+        d += "\n <=5 tiles from bar: -100";
+        return d;
+    }
 }
