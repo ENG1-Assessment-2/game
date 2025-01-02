@@ -6,8 +6,8 @@ import com.badlogic.UniSim2.resources.Consts;
 
 public enum BuildingType {
     ACCOMMODATION(
-            Consts.ACCOMODATION_WIDTH,
-            Consts.ACCOMODATION_HEIGHT,
+            Consts.ACCOMMODATION_WIDTH,
+            Consts.ACCOMMODATION_HEIGHT,
             Accommodation::new
     ),
     LECTUREHALL(
@@ -15,25 +15,15 @@ public enum BuildingType {
             Consts.LECTUREHALL_HEIGHT,
             LectureHall::new
     ),
-    LIBRARY(
-            Consts.LIBRARY_WIDTH,
-            Consts.LIBRARY_HEIGHT,
-            Library::new
-    ),
-    COURSE(
-            Consts.COURSE_WIDTH,
-            Consts.COURSE_HEIGHT,
-            Course::new
+    BAR(
+            Consts.BAR_WIDTH,
+            Consts.BAR_HEIGHT,
+            Bar::new
     ),
     FOODZONE(
             Consts.FOODZONE_WIDTH,
             Consts.FOODZONE_HEIGHT,
             FoodZone::new
-    ),
-    RECREATIONAL(
-            Consts.RECREATIONAL_WIDTH,
-            Consts.RECREATIONAL_HEIGHT,
-            Recreational::new
     ),
     NATURE(
             Consts.NATURE_WIDTH,
