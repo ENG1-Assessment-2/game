@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.badlogic.UniSim2.core.Round;
 import com.badlogic.UniSim2.core.achievements.Achievement;
+import com.badlogic.UniSim2.gui.AchievementsTextbox;
 import com.badlogic.UniSim2.gui.Map;
 import com.badlogic.UniSim2.gui.Menu;
 import com.badlogic.UniSim2.gui.PopupTextboxActor;
@@ -30,6 +31,7 @@ public class RoundScreen extends GameScreen {
     private final Round round;
     private final Menu menu;
     private final Map map;
+    private AchievementsTextbox activeAchievementsTextbox;
 
     public RoundScreen(Round round, PlayScreenCallback callback) {
         super();
@@ -39,6 +41,7 @@ public class RoundScreen extends GameScreen {
         this.callback = callback;
         this.map = new Map(stage, round);
         this.menu = new Menu(stage, round);
+        this.activeAchievementsTextbox = null;
         SoundManager.getInstance().playMusic();
     }
 
@@ -70,6 +73,18 @@ public class RoundScreen extends GameScreen {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
             SoundManager.getInstance().toggleMute();
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
+            round.togglePause();
+            if (activeAchievementsTextbox == null) {
+                activeAchievementsTextbox = new AchievementsTextbox();
+                activeAchievementsTextbox.updateText(round.getCompletedAchievements(), round.getAllAchievements());
+                popupStage.addActor(activeAchievementsTextbox);
+            } else {
+                activeAchievementsTextbox.remove();
+                activeAchievementsTextbox = null;
+            }
         }
     }
 
