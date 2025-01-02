@@ -71,6 +71,40 @@ public class Round {
         }
     }
 
+    public int getStudentSatisfaction() {
+        return getStudentSatisfactionFromBuildings();
+    }
+
+    private int getStudentSatisfactionFromBuildings() {
+        int s = 0;
+
+        // each lecture hall adds 100
+        int numberOfLectureHalls = grid.getBuildingCount(BuildingType.LECTUREHALL);
+        s += numberOfLectureHalls * 100;
+
+        // each accommodation adds 40
+        int numberOfAccommodations = grid.getBuildingCount(BuildingType.ACCOMMODATION);
+        s += numberOfAccommodations * 40;
+
+        // each bar adds 60
+        int numberOfBars = grid.getBuildingCount(BuildingType.BAR);
+        s += numberOfBars * 60;
+
+        // each nature adds 10
+        int numberOfNatures = grid.getBuildingCount(BuildingType.NATURE);
+        s += numberOfNatures * 10;
+
+        // each food zone adds 50
+        int numberOfFoodZones = grid.getBuildingCount(BuildingType.FOODZONE);
+        s += numberOfFoodZones * 50;
+
+        // each bar within 5 tiles of an accommodation removes 100
+        // each within 4 tiles of a lecture hall adds 60
+        // each nature adjacent to an accommodation adds 30
+        // similar numbers of building type increase satisfaction
+        return s;
+    }
+
     public List<Building> getPlacedBuildings() {
         return grid.getPlacedBuildings();
     }
