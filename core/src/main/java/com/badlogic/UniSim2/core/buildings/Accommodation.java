@@ -10,4 +10,9 @@ class Accommodation extends Building {
                 BuildingType.ACCOMMODATION
         );
     }
+
+    @Override
+    public int getCost() {
+        return 200 * 1000;
+    }
 }

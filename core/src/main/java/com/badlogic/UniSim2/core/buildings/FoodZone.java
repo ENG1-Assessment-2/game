@@ -10,4 +10,9 @@ class FoodZone extends Building {
                 BuildingType.FOODZONE
         );
     }
+
+    @Override
+    public int getCost() {
+        return 250 * 1000;
+    }
 }

@@ -14,12 +14,15 @@ public class Round {
     private float elapsedTime;
     private boolean isPaused;
     private BuildingType selectedBuildingType;
+    private int funds;
+    private float timeSinceLastPay;
 
     public Round() {
         this.grid = new Grid(38, 66);
         this.elapsedTime = 0;
         this.isPaused = false;
         this.selectedBuildingType = null;
+        this.funds = 500000;
 
         grid.placePath(38, 0, 2, 38);
         grid.placePath(38, 17, 2, 38);
@@ -31,8 +34,17 @@ public class Round {
     }
 
     public void update(float delta) {
-        if (elapsedTime < Consts.MAX_TIME && !isPaused) {
-            elapsedTime += delta;
+        if (isPaused || elapsedTime >= Consts.MAX_TIME) {
+            return;
+        }
+
+        elapsedTime += delta;
+
+        if (timeSinceLastPay >= 3) {
+            funds += 30000;
+            timeSinceLastPay = 0;
+        } else {
+            timeSinceLastPay += delta;
         }
     }
 
@@ -41,6 +53,11 @@ public class Round {
     }
 
     public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
+        int buildingCost = type.create(0, 0).getCost();
+        if (funds < buildingCost) {
+            throw new BuildingPlacementException("Not enough funds to place building");
+        }
+        funds -= buildingCost;
         grid.placeBuilding(type, row, col);
     }
 
@@ -54,6 +71,10 @@ public class Round {
 
     public boolean getCanPlace(BuildingType type, int row, int col) {
         return grid.getCanPlace(type, row, col);
+    }
+
+    public boolean getCanAfford(BuildingType type) {
+        return funds >= type.create(0, 0).getCost();
     }
 
     public int getBuildingCount(BuildingType type) {
@@ -82,5 +103,9 @@ public class Round {
 
     public boolean isOver() {
         return elapsedTime >= Consts.MAX_TIME;
+    }
+
+    public int getFunds() {
+        return funds;
     }
 }
