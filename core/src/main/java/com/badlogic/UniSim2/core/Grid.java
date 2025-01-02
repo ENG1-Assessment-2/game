@@ -23,6 +23,15 @@ public class Grid {
         this.paths = new ArrayList<>();
     }
 
+    public void moveBuilding(Building building, int row, int col) throws BuildingPlacementException {
+        if (!getCanPlace(building.getType(), row, col)) {
+            throw new BuildingPlacementException("Cannot place building at row " + row + " and col " + col);
+        }
+
+        placeBuilding(building.getType(), row, col);
+        buildings.remove(building);
+    }
+
     public List<Building> getPlacedBuildings() {
         return buildings;
     }
