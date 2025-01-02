@@ -2,9 +2,9 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [ "ci-achievements-and-small-changes" ]
+    branches: [ "just-CI" ]
   pull_request:
-    branches: [ "ci-achievements-and-small-changes" ]
+    branches: [ "just-CI" ]
 
 jobs:
   build:
