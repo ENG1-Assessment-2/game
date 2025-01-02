@@ -2,9 +2,9 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [ "just-CI" ]
+    branches: [ "just-ci1" ]
   pull_request:
-    branches: [ "just-CI" ]
+    branches: [ "just-ci1" ]
 
 jobs:
   build:
