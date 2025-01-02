@@ -19,6 +19,7 @@ public class Menu {
     private final Array<BuildingButton> buildingButtons;
     private final Round round;
     private final Stage stage;
+    private TextboxActor buildingInfoTextbox;
 
     public Menu(Stage stage, Round round) {
         this.stage = stage;
@@ -29,6 +30,7 @@ public class Menu {
         Image menuBar = createMenuBar();
         this.timerLabel = new TimerLabel(round, skin);
         this.fundsLabel = new FundsLabel(round, skin);
+        this.buildingInfoTextbox = null;
 
         stage.addActor(menuBar);
         stage.addActor(timerLabel);
@@ -40,8 +42,26 @@ public class Menu {
         timerLabel.update();
         fundsLabel.update();
 
+        TextboxActor newTextbox = null;
+
         for (BuildingButton button : buildingButtons) {
             button.update();
+
+            if (button.isHovered) {
+                newTextbox = new TextboxActor(
+                        button.getType().create(0, 0).getDescription(),
+                        Consts.WORLD_WIDTH - 290, Consts.WORLD_HEIGHT - 10, 300
+                );
+            }
+        }
+
+        if (buildingInfoTextbox != null) {
+            buildingInfoTextbox.remove();
+        }
+
+        if (newTextbox != null) {
+            buildingInfoTextbox = newTextbox;
+            stage.addActor(buildingInfoTextbox);
         }
     }
 
