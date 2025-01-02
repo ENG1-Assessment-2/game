@@ -26,34 +26,24 @@ public class BuildingImage extends Image {
     private void loadTextures() {
         switch (type) {
             case ACCOMMODATION:
-                placedTexture = Assets.accomodationPlacedTexture;
-                draggingTexture = Assets.accomodationDraggingTexture;
-                collisionTexture = Assets.accomodationCollisionTexture;
+                placedTexture = Assets.accommodationPlacedTexture;
+                draggingTexture = Assets.accommodationDraggingTexture;
+                collisionTexture = Assets.accommodationCollisionTexture;
                 break;
             case LECTUREHALL:
                 placedTexture = Assets.lectureHallPlacedTexture;
                 draggingTexture = Assets.lectureHallDraggingTexture;
                 collisionTexture = Assets.lectureHallCollisionTexture;
                 break;
-            case LIBRARY:
-                placedTexture = Assets.libraryPlacedTexture;
-                draggingTexture = Assets.libraryDraggingTexture;
-                collisionTexture = Assets.libraryCollisionTexture;
-                break;
-            case COURSE:
-                placedTexture = Assets.coursePlacedTexture;
-                draggingTexture = Assets.courseDraggingTexture;
-                collisionTexture = Assets.courseCollisionTexture;
+            case BAR:
+                placedTexture = Assets.barPlacedTexture;
+                draggingTexture = Assets.barDraggingTexture;
+                collisionTexture = Assets.barCollisionTexture;
                 break;
             case FOODZONE:
                 placedTexture = Assets.foodZonePlacedTexture;
                 draggingTexture = Assets.foodZoneDraggingTexture;
                 collisionTexture = Assets.foodZoneCollisionTexture;
-                break;
-            case RECREATIONAL:
-                placedTexture = Assets.recreationalPlacedTexture;
-                draggingTexture = Assets.recreationalDraggingTexture;
-                collisionTexture = Assets.recreationalCollisionTexture;
                 break;
             case NATURE:
                 placedTexture = Assets.naturePlacedTexture;
@@ -68,22 +58,16 @@ public class BuildingImage extends Image {
     private void setSize() {
         switch (type) {
             case ACCOMMODATION:
-                setSize(Consts.ACCOMODATION_WIDTH * Consts.CELL_SIZE, Consts.ACCOMODATION_HEIGHT * Consts.CELL_SIZE);
+                setSize(Consts.ACCOMMODATION_WIDTH * Consts.CELL_SIZE, Consts.ACCOMMODATION_HEIGHT * Consts.CELL_SIZE);
                 break;
             case LECTUREHALL:
                 setSize(Consts.LECTUREHALL_WIDTH * Consts.CELL_SIZE, Consts.LECTUREHALL_HEIGHT * Consts.CELL_SIZE);
                 break;
-            case LIBRARY:
-                setSize(Consts.LIBRARY_WIDTH * Consts.CELL_SIZE, Consts.LIBRARY_HEIGHT * Consts.CELL_SIZE);
-                break;
-            case COURSE:
-                setSize(Consts.COURSE_WIDTH * Consts.CELL_SIZE, Consts.COURSE_HEIGHT * Consts.CELL_SIZE);
+            case BAR:
+                setSize(Consts.BAR_WIDTH * Consts.CELL_SIZE, Consts.BAR_HEIGHT * Consts.CELL_SIZE);
                 break;
             case FOODZONE:
-                setSize(Consts.FOODZONE_WIDTH * Consts.CELL_SIZE, Consts.FOODZONE_WIDTH * Consts.CELL_SIZE);
-                break;
-            case RECREATIONAL:
-                setSize(Consts.RECREATIONAL_WIDTH * Consts.CELL_SIZE, Consts.RECREATIONAL_HEIGHT * Consts.CELL_SIZE);
+                setSize(Consts.FOODZONE_WIDTH * Consts.CELL_SIZE, Consts.FOODZONE_HEIGHT * Consts.CELL_SIZE);
                 break;
             case NATURE:
                 setSize(Consts.NATURE_WIDTH * Consts.CELL_SIZE, Consts.NATURE_HEIGHT * Consts.CELL_SIZE);

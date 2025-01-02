@@ -97,24 +97,18 @@ public class Consts {
     public static final int MAP_MIN_Y_BOUNDARY = scaleToCellSize(0);
     public static final int MAP_MAX_Y_BOUNDARY = WORLD_HEIGHT;
 
-    public static final int ACCOMODATION_WIDTH = 4;
-    public static final int ACCOMODATION_HEIGHT = 6;
-
     public static final int LECTUREHALL_WIDTH = 6;
     public static final int LECTUREHALL_HEIGHT = 10;
 
-    public static final int LIBRARY_WIDTH = 10;
-    public static final int LIBRARY_HEIGHT = 3;
+    public static final int ACCOMMODATION_WIDTH = 4;
+    public static final int ACCOMMODATION_HEIGHT = 6;
 
-    public static final int COURSE_WIDTH = 5;
-    public static final int COURSE_HEIGHT = 5;
-
-    public static final int FOODZONE_WIDTH = 2;
-    public static final int FOODZONE_HEIGHT = 2;
-
-    public static final int RECREATIONAL_WIDTH = 3;
-    public static final int RECREATIONAL_HEIGHT = 4;
+    public static final int BAR_WIDTH = 3;
+    public static final int BAR_HEIGHT = 4;
 
     public static final int NATURE_WIDTH = 4;
     public static final int NATURE_HEIGHT = 5;
+
+    public static final int FOODZONE_WIDTH = 2;
+    public static final int FOODZONE_HEIGHT = 2;
 }
