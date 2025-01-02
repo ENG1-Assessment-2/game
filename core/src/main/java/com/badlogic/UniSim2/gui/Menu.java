@@ -16,6 +16,7 @@ public class Menu {
     private final Skin skin;
     private final TimerLabel timerLabel;
     private final FundsLabel fundsLabel;
+    private final SatisfactionLabel satisfactionLabel;
     private final Array<BuildingButton> buildingButtons;
     private final Round round;
     private final Stage stage;
@@ -30,17 +31,20 @@ public class Menu {
         Image menuBar = createMenuBar();
         this.timerLabel = new TimerLabel(round, skin);
         this.fundsLabel = new FundsLabel(round, skin);
+        this.satisfactionLabel = new SatisfactionLabel(round, skin);
         this.buildingInfoTextbox = null;
 
         stage.addActor(menuBar);
         stage.addActor(timerLabel);
         stage.addActor(fundsLabel);
+        stage.addActor(satisfactionLabel);
         createBuildingButtons();
     }
 
     public void update() {
         timerLabel.update();
         fundsLabel.update();
+        satisfactionLabel.update();
 
         TextboxActor newTextbox = null;
 
