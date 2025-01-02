@@ -11,10 +11,10 @@ public class TimerLabel extends Label {
     private final Round round;
 
     public TimerLabel(Round round, Skin skin) {
-        super("00:00", skin);
+        super("0.0 years", skin);
         this.round = round;
 
-        setFontScale(3);
+        setFontScale(2.5f);
         setAlignment(Align.center);
         setColor(Consts.TIMER_COLOR);
         setPosition(Consts.TIMER_X, Consts.TIMER_Y, Align.center);
@@ -27,8 +27,9 @@ public class TimerLabel extends Label {
     }
 
     private String formatTime(float time) {
-        int minutes = (int) (time / 60);
-        int seconds = (int) (time % 60);
-        return String.format("%02d:%02d", minutes, seconds);
+        int maxTime = Consts.MAX_TIME;
+        float remainingTime = maxTime - time;
+        float yearsRemaining = (remainingTime / maxTime) * 5;
+        return String.format("%.1f years", yearsRemaining);
     }
 }
