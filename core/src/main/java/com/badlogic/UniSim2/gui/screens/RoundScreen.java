@@ -54,6 +54,10 @@ public class RoundScreen extends GameScreen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             round.togglePause();
         }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+            SoundManager.getInstance().toggleMute();
+        }
     }
 
     private void update() {
