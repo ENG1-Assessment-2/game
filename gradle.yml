@@ -28,7 +28,7 @@ jobs:
       run: chmod +x gradlew
       
     - name: Build the project
-      run: ./gradlew build --scan
+      run: ./gradlew build 
       shell: bash
 
     - name: Run tests and generate JaCoCo report
