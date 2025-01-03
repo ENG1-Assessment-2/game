@@ -1,13 +1,13 @@
 plugins {
-    id 'eclipse'
     id 'java'
     id 'jacoco'
-    id 'checkstyle'  
+    id 'checkstyle'
+    id 'eclipse'
     id 'java-library'
 }
 def checkstyleVersion = '10.4'
 
-repositories {
+  repositories {
     mavenCentral()
     maven { url 'https://s01.oss.sonatype.org' }
     gradlePluginPortal()
@@ -17,32 +17,8 @@ repositories {
     maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
   }
 
-plugins {
-    id 'java'
-    id 'jacoco'
-}
-
-jacoco {
-    toolVersion = "0.8.10" 
-}
-
-tasks.jacocoTestReport {
-    reports {
-        xml.required = true
-        html.required = true
-    }
-}
-
-dependencies {
-  api "com.badlogicgames.gdx:gdx:$gdxVersion"
-
-  if(enableGraalNative == 'true') {
-    implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
-  }
-}
-
 configurations {
-  checkstyleRules 
+  checkstyleRules
 }
 
 dependencies {
@@ -51,7 +27,19 @@ dependencies {
       transitive = false
   }
 }
-  
+
+jacoco {
+  toolVersion = "0.8.10"
+}
+
+tasks.jacocoTestReport {
+  reports {
+    xml.required = true
+    html.required = true
+  }
+}
+
+
 tasks.test{
   useJUnitPlatform()
   finalizedBy(tasks.jacocoTestReport)
