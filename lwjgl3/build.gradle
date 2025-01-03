@@ -36,8 +36,13 @@ test {
 }
 
 def checkstyleVersion = '10.4'
-configurations {
-  checkstyleRules
+checkstyle {
+  toolVersion = checkstyleVersion
+  configFile = file("${projectDir}/config/checkstyle/checkstyle.xml")
+}
+
+tasks.withType(Checkstyle).configureEach {
+  configFile = file("${projectDir}/config/checkstyle/checkstyle.xml")
 }
 
 dependencies {
