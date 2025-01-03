@@ -32,10 +32,6 @@ dependencies {
   checkstyleRules("com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
     transitive = false
   }
-checkstyle {
-  toolVersion "${checkstyleVersion}"
-  config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
-  }
 }
 allprojects {
 apply plugin: 'eclipse'
