@@ -1,5 +1,3 @@
-enableGraalNative=true
-
 plugins {
     id 'java'
     id 'jacoco'
