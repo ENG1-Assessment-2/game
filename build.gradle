@@ -25,6 +25,8 @@ dependencies {
   checkstyleRules(
     "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
       transitive = false
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'
+  
   }
 }
 
@@ -32,20 +34,18 @@ jacoco {
   toolVersion = "0.8.10"
 }
 
-tasks.jacocoTestReport {
-  reports {
-    xml.required = true
-    html.required = true
-  }
+test {
+    useJUnitPlatform()  // If you are using JUnit 5
+    finalizedBy jacocoTestReport  // Ensure JaCoCo report is generated after tests
 }
 
-
-tasks.test{
-  useJUnitPlatform()
-  finalizedBy(tasks.jacocoTestReport)
-
-tasks.jacocoTestReport {
-  dependsOn(tasks.test)
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled true
+        html.enabled true
+        html.destination file("${buildDir}/reports/jacoco/test/html")  // Specify the output location of the HTML report
+    }
 }
 checkstyle {
   toolVersion "${checkstyleVersion}"
