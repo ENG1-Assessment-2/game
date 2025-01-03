@@ -1,4 +1,3 @@
-
 enableGraalNative=true
 
 buildscript {
@@ -47,10 +46,8 @@ dependencies {
     transitive = false
   }
 checkstyle {
-// same toolVersion
-config = resources.text.fromArchiveEntry(
-configurations.checkstyleRules, "google_checks.xml")
-}
+  config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
+  }
 }
 
 
