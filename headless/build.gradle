@@ -39,6 +39,19 @@ dependencies {
   }
 }
   
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
+
+
+
 tasks.test{
   useJUnitPlatform()
   finalizedBy(tasks.jacocoTestReport)
