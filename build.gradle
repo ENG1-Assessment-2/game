@@ -4,7 +4,7 @@ plugins {
     id 'checkstyle'
     id 'eclipse'
 }
-def checkstyleVersion = '10.4'
+
 repositories {
   mavenCentral()
   maven { url 'https://s01.oss.sonatype.org' }
@@ -15,6 +15,15 @@ repositories {
   maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
 }
 
+jacoco {
+  toolVersion = "0.8.10"
+}
+
+test {
+  useJUnitPlatform()
+  finalizedBy jacocoTestReport 
+}
+def checkstyleVersion = '10.4'
 configurations {
   checkstyleRules
 }
@@ -24,22 +33,9 @@ dependencies {
     transitive = false
   }
 checkstyle {
-  config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
-  }
-}
-
-jacoco {
-  toolVersion = "0.8.10"
-}
-
-test {
-  useJUnitPlatform()
-  finalizedBy jacocoTestReport 
-}
-
-checkstyle {
   toolVersion "${checkstyleVersion}"
   config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
+  }
 }
 allprojects {
 apply plugin: 'eclipse'
