@@ -1,72 +1,42 @@
-name: Continuous Integratio
+name: Continuous Integration
 
 on:
   push:
-    branches: [ "ci/setup" ]
+    branches: [ "ci2" ]
   pull_request:
-    branches: [ "ci/setup" ]
-
+    branches: [ "ci2" ]
 jobs:
   build:
-    strategy:
-      matrix:
-        os: [ubuntu-22.04, windows-2022, macos-12]
-        java: [17]
-    runs-on: ${{matrix.os}}
-  
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+  steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
 
-      - name: Set up JDK ${{ matrix.java }}
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: ${{ matrix.java }}
-          cache: gradle
-          
-      - name: Grant execute permission for Gradle wrapper (if on Unix)
-        if: runner.os != 'Windows'
-        run: chmod +x gradlew
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+    - name: Build with Gradle Wrapper
+      run: ./gradlew build
 
-      - name: Build the project
-        run: ./gradlew build --scan
-        shell: bash
+    - name: Grant execute permission for Gradle wrapper (if on Unix)
+      if: runner.os != 'Windows'
+      run: chmod +x gradlew
+      
+    - name: Build the project
+      run: ./gradlew build --scan
+      shell: bash
 
-      - name: Run Checkstyle
-        run: ./gradlew checkstyleMain checkstyleTest
-        shell: bash
+    - name: Run tests and generate JaCoCo report
+      run: ./gradlew test jacocoTestReport
+      shell: bash
 
-      - name: Upload Checkstyle Reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: checkstyle-report-${{ matrix.os }}
-          path: |
-            *.github/workflows/build/reports/checkstyle/.html
-            *.github/workflows/build/reports/checkstyle/.xml
-
-      - name: Run tests and generate JaCoCo report
-        run: ./gradlew test jacocoTestReport
-        shell: bash
-
-      - name: Upload JaCoCo Code Coverage Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: code-coverage-report-${{ matrix.os }}
-          path: headless/build/reports/jacoco/test/html/**
-
-      - name: Compile JAR using shadowJar
-        run: ./gradlew shadowJar
-        shell: bash
-
-      - name: List JAR Files
-        run: ls -la lwjgl3/build/libs/
-        shell: bash
-
-      - name: Upload built JAR as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: unisim-a2-lwjgl3-all-${{ matrix.os }}
-          path: lwjgl3/build/libs/unisim-a2-lwjgl3-all.jar
- 
+    - name: Upload JaCoCo Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: jacoco-report
+        path: build/reports/jacoco/test/html/**
