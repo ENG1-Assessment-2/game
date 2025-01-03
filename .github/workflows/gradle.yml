@@ -41,7 +41,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build the project
-        run: ./gradlew build
+        run: ./gradlew build -- scan
         shell: bash
 
       - name: Run Checkstyle
