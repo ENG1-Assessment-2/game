@@ -24,6 +24,11 @@ dependencies {
     "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
     transitive = false
   }
+checkstyle {
+// same toolVersion
+config = resources.text.fromArchiveEntry(
+configurations.checkstyleRules, 'google_checks.xml’)
+}
 }
 
 jacoco {
