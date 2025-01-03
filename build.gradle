@@ -1,3 +1,5 @@
+enableGraalNative=true
+
 plugins {
     id 'java'
     id 'jacoco'
@@ -25,9 +27,8 @@ dependencies {
     transitive = false
   }
 checkstyle {
-config = resources.text.fromArchiveEntry(
-configurations.checkstyleRules, "google_checks.xml")
-}
+config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
+  }
 }
 
 jacoco {
