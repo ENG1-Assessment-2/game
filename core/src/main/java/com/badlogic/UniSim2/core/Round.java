@@ -14,6 +14,10 @@ import com.badlogic.UniSim2.core.buildings.Building;
 import com.badlogic.UniSim2.core.buildings.BuildingPlacementException;
 import com.badlogic.UniSim2.core.buildings.BuildingRemovalException;
 import com.badlogic.UniSim2.core.buildings.BuildingType;
+import com.badlogic.UniSim2.core.events.Event;
+import com.badlogic.UniSim2.core.events.FireEvent;
+import com.badlogic.UniSim2.core.events.GrantEvent;
+import com.badlogic.UniSim2.core.events.RoyalEvent;
 import com.badlogic.UniSim2.resources.Consts;
 
 public class Round {
@@ -32,15 +36,24 @@ public class Round {
     private int funds;
     private float timeSinceLastPay;
     private final Set<Achievement> completedAchievements;
+    private final Set<Event> events;
+    private final Set<Event> triggeredEvents;
+    private int satisfactionAddend;
 
     public Round() {
         this.grid = new Grid(38, 66);
         this.elapsedTime = 0;
         this.isPaused = false;
         this.selectedBuildingType = null;
-        this.funds = 5000000;
+        this.funds = 500000;
         this.timeSinceLastPay = 0;
         this.completedAchievements = new HashSet<>();
+        this.events = new HashSet<>(Arrays.asList(
+                new RoyalEvent(this),
+                new GrantEvent(this),
+                new FireEvent(this)
+        ));
+        this.triggeredEvents = new HashSet<>();
 
         grid.placePath(38, 0, 2, 38);
         grid.placePath(38, 17, 2, 38);
@@ -70,10 +83,27 @@ public class Round {
                 completedAchievements.add(achievement);
             }
         }
+
+        for (Event event : events) {
+            event.update(delta);
+
+            boolean triggered = event.attemptTrigger();
+            if (triggered) {
+                triggeredEvents.add(event);
+            }
+        }
+    }
+
+    public void addToSatisfactionAddend(int addend) {
+        satisfactionAddend += addend;
+    }
+
+    public Set<Event> getTriggeredEvents() {
+        return triggeredEvents;
     }
 
     public int getStudentSatisfaction() {
-        return (int) (getStudentSatisfactionFromBuildings() * getDiversityFactor());
+        return ((int) (getStudentSatisfactionFromBuildings() * getDiversityFactor())) + satisfactionAddend;
     }
 
     private int getStudentSatisfactionFromBuildings() {
@@ -226,12 +256,20 @@ public class Round {
         return grid.getIsBuildingAt(row, col);
     }
 
+    public Building getBuildingAt(int row, int col) {
+        return grid.getBuildingAt(row, col);
+    }
+
     public boolean getCanPlace(BuildingType type, int row, int col) {
         return grid.getCanPlace(type, row, col);
     }
 
     public boolean getCanAfford(BuildingType type) {
         return funds >= type.create(0, 0).getCost();
+    }
+
+    public void addToFunds(int amount) {
+        funds += amount;
     }
 
     public int getBuildingCount(BuildingType type) {
