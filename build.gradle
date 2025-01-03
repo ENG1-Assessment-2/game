@@ -25,7 +25,7 @@ dependencies {
     transitive = false
   }
 checkstyle {
-config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
+  config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
   }
 }
 
@@ -38,11 +38,9 @@ test {
   finalizedBy jacocoTestReport 
 }
 
-
-
 checkstyle {
   toolVersion "${checkstyleVersion}"
-  config = resources.text.fromArchiveEntry(configurations.checkstyleRules, 'google_checks.xml')
+  config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
 }
 allprojects {
 apply plugin: 'eclipse'
