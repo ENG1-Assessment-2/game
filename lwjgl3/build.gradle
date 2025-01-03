@@ -36,6 +36,7 @@ test {
   finalizedBy jacocoTestReport
 }
 
+def checkstyleVersion = '10.4'
 configurations {
   checkstyleRules
 }
@@ -45,10 +46,10 @@ dependencies {
     transitive = false
   }
 checkstyle {
+  toolVersion "${checkstyleVersion}"
   config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
   }
 }
-
 
 import io.github.fourlastor.construo.Target
 
