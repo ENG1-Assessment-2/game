@@ -45,10 +45,6 @@ dependencies {
   checkstyleRules("com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
     transitive = false
   }
-checkstyle {
-  toolVersion "${checkstyleVersion}"
-  config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
-  }
 }
 
 import io.github.fourlastor.construo.Target
