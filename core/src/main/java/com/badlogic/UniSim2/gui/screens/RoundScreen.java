@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.badlogic.UniSim2.core.Round;
 import com.badlogic.UniSim2.core.achievements.Achievement;
+import com.badlogic.UniSim2.core.events.Event;
 import com.badlogic.UniSim2.gui.AchievementsTextbox;
 import com.badlogic.UniSim2.gui.Map;
 import com.badlogic.UniSim2.gui.Menu;
@@ -26,6 +27,7 @@ public class RoundScreen extends GameScreen {
     }
 
     private final Set<Achievement> announcedAchievements;
+    private final Set<Event> announcedEvents;
     private final Stage popupStage;
     private final PlayScreenCallback callback;
     private final Round round;
@@ -36,6 +38,7 @@ public class RoundScreen extends GameScreen {
     public RoundScreen(Round round, PlayScreenCallback callback) {
         super();
         this.announcedAchievements = new HashSet<>();
+        this.announcedEvents = new HashSet<>();
         this.popupStage = new Stage(viewport);
         this.round = round;
         this.callback = callback;
@@ -103,6 +106,17 @@ public class RoundScreen extends GameScreen {
                 announcedAchievements.add(achievement);
                 PopupTextboxActor popup = new PopupTextboxActor(
                         "Achievement Unlocked: " + achievement.getName() + "\n" + achievement.getDescription(),
+                        (Consts.WORLD_WIDTH - 600) / 2, Consts.WORLD_HEIGHT - 30, 700
+                );
+                popupStage.addActor(popup);
+            }
+        }
+
+        for (Event event : round.getTriggeredEvents()) {
+            if (!announcedEvents.contains(event)) {
+                announcedEvents.add(event);
+                PopupTextboxActor popup = new PopupTextboxActor(
+                        "Event: " + event.getName() + "\n" + event.getDescription(),
                         (Consts.WORLD_WIDTH - 600) / 2, Consts.WORLD_HEIGHT - 30, 700
                 );
                 popupStage.addActor(popup);
