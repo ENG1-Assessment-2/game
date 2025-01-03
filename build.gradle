@@ -1,56 +1,55 @@
 plugins {
-    id 'eclipse'
     id 'java'
     id 'jacoco'
-    id 'checkstyle'  
-    id 'java-library'
+    id 'checkstyle'
+    id 'eclipse'
 }
 def checkstyleVersion = '10.4'
-
 repositories {
-    mavenCentral()
-    maven { url 'https://s01.oss.sonatype.org' }
-    gradlePluginPortal()
-    mavenLocal()
-    google()
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-    maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
-  }
+  mavenCentral()
+  maven { url 'https://s01.oss.sonatype.org' }
+  gradlePluginPortal()
+  mavenLocal()
+  google()
+  maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+  maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+}
 
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 eclipse.project.name = appName + '-core'
 
-dependencies {
-  api "com.badlogicgames.gdx:gdx:$gdxVersion"
-
-  if(enableGraalNative == 'true') {
-    implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
-  }
-}
-
 configurations {
-  checkstyleRules 
+  checkstyleRules
 }
 
 dependencies {
   checkstyleRules(
     "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
-      transitive = false
+    transitive = false
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.2'  
   }
 }
-  
-tasks.test{
-  useJUnitPlatform()
-  finalizedBy(tasks.jacocoTestReport)
 
-tasks.jacocoTestReport {
-  dependsOn(tasks.test)
+jacoco {
+  toolVersion = "0.8.10"
+}
+
+test {
+  useJUnitPlatform()  // If you are using JUnit 5
+  finalizedBy jacocoTestReport  // Ensure JaCoCo report is generated after tests
+}
+
+jacocoTestReport {
+  dependsOn test
+  reports {
+      xml.enabled true
+      html.enabled true
+      html.destination file("${buildDir}/reports/jacoco/test/html")  // Specify the output location of the HTML report
+   }
 }
 checkstyle {
   toolVersion "${checkstyleVersion}"
-  config = resources.text.fromArchiveEntry(
-    configurations.checkstyleRules, 'google_checks.xml')
-}
+  config = resources.text.fromArchiveEntry(configurations.checkstyleRules, 'google_checks.xml')
 }
 allprojects {
 apply plugin: 'eclipse'
@@ -86,10 +85,10 @@ configure(subprojects) {
       assetsFile.append(it + "\n")
     }
   }
-  processResources.dependsOn 'generateAssetList'
+processResources.dependsOn 'generateAssetList'
 
-  compileJava {
-    options.incremental = true
+compileJava {
+  options.incremental = true
   }
 }
 
