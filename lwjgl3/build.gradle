@@ -32,22 +32,6 @@ jacocoTestReport {
 
 test {
   useJUnitPlatform()
-  testLogging {
-    // Set options for log level LIFECYCLE
-    events "passed", "skipped", "failed"
-    exceptionFormat "short"
-
-    // Set options for log level DEBUG
-    debug {
-      events "started", "passed", "skipped", "failed"
-      exceptionFormat "full"
-    }
-
-    // Set options for log level INFO
-    info {
-      events "passed", "skipped", "failed"
-    }
-  }
   finalizedBy jacocoTestReport
 }
 
@@ -63,7 +47,7 @@ dependencies {
 checkstyle {
 // same toolVersion
 config = resources.text.fromArchiveEntry(
-configurations.checkstyleRules, 'google_checks.xml’)
+configurations.checkstyleRules, "google_checks.xml")
 }
 }
 
