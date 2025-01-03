@@ -12,6 +12,41 @@ buildscript {
 plugins {
   id "io.github.fourlastor.construo" version "1.4.1"
   id "application"
+  id "java"
+  id "jacoco"
+}
+
+jacocoTestReport {
+  dependsOn test
+  sourceSets project(':core').sourceSets.main
+  dependsOn test
+
+  reports {
+    xml.required = true
+    html.required = true
+  }
+}
+
+
+test {
+  useJUnitPlatform()
+  testLogging {
+    // Set options for log level LIFECYCLE
+    events "passed", "skipped", "failed"
+    exceptionFormat "short"
+
+    // Set options for log level DEBUG
+    debug {
+      events "started", "passed", "skipped", "failed"
+      exceptionFormat "full"
+    }
+
+    // Set options for log level INFO
+    info {
+      events "passed", "skipped", "failed"
+    }
+  }
+  finalizedBy jacocoTestReport
 }
 
 
