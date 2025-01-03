@@ -41,14 +41,15 @@ test {
 }
 
 def checkstyleVersion = '10.4'
+configurations {
+  checkstyleRules
+}
+
 checkstyle {
   toolVersion "${checkstyleVersion}"
     config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
 }
 
-configurations {
-  checkstyleRules
-}
 dependencies {
 checkstyleRules(
   "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
