@@ -1,3 +1,4 @@
+enableGraalNative=true
 
 buildscript {
   repositories {
