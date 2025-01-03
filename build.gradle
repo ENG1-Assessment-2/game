@@ -15,9 +15,6 @@ repositories {
   maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
 }
 
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-eclipse.project.name = appName + '-core'
-
 configurations {
   checkstyleRules
 }
