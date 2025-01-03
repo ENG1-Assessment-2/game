@@ -23,12 +23,16 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build
 
-      - name: Run Coverage
-        run: |
-          chmod +x gradlew
-          ./gradlew test
-      - name: Add coverage to PR
-        id: jacoco
-        uses: jacoco-maven-plugin@v0.8.10
-          with:
-            paths:
+      - name: Build the project
+        run: ./gradlew build
+        shell: bash
+
+      - name: Run tests and generate JaCoCo report
+        run: ./gradlew test jacocoTestReport
+        shell: bash
+
+      - name: Upload JaCoCo Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: build/reports/jacoco/test/html/**
