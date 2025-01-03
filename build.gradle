@@ -1,5 +1,13 @@
-buildscript {
-  repositories {
+plugins {
+    id 'eclipse'
+    id 'java'
+    id 'jacoco'
+    id 'checkstyle'  
+    id 'java-library'
+}
+def checkstyleVersion = '10.4'
+
+repositories {
     mavenCentral()
     maven { url 'https://s01.oss.sonatype.org' }
     gradlePluginPortal()
@@ -8,21 +16,50 @@ buildscript {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
   }
-  dependencies {
 
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+eclipse.project.name = appName + '-core'
 
+dependencies {
+  api "com.badlogicgames.gdx:gdx:$gdxVersion"
+
+  if(enableGraalNative == 'true') {
+    implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"
   }
 }
 
-allprojects {
-  apply plugin: 'eclipse'
-  apply plugin: 'idea'
+configurations {
+  checkstyleRules 
+}
 
+dependencies {
+  checkstyleRules(
+    "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
+      transitive = false
+  }
+}
+  
+tasks.test{
+  useJUnitPlatform()
+  finalizedBy(tasks.jacocoTestReport)
+
+tasks.jacocoTestReport {
+  dependsOn(tasks.test)
+}
+checkstyle {
+  toolVersion "${checkstyleVersion}"
+  config = resources.text.fromArchiveEntry(
+    configurations.checkstyleRules, 'google_checks.xml')
+}
+}
+allprojects {
+apply plugin: 'eclipse'
+apply plugin: 'idea'
   // This allows you to "Build and run using IntelliJ IDEA", an option in IDEA's Settings.
-  idea {
-    module {
-      outputDir file('build/classes/java/main')
-      testOutputDir file('build/classes/java/test')
+ idea {
+   module {
+    outputDir file('build/classes/java/main')
+    testOutputDir file('build/classes/java/test')
     }
   }
 }
