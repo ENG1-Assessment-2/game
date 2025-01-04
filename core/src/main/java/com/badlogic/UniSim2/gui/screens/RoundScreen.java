@@ -45,7 +45,6 @@ public class RoundScreen extends GameScreen {
         this.map = new Map(stage, round);
         this.menu = new Menu(stage, round);
         this.activeAchievementsTextbox = null;
-        SoundManager.getInstance().playMusic();
     }
 
     @Override

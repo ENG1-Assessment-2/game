@@ -5,7 +5,9 @@ import java.util.List;
 import com.badlogic.UniSim2.gui.TextboxActor;
 import com.badlogic.UniSim2.resources.Assets;
 import com.badlogic.UniSim2.resources.Consts;
+import com.badlogic.UniSim2.resources.SoundManager;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -40,6 +42,7 @@ public class StartScreen extends GameScreen {
         this.spriteBatch = new SpriteBatch();
         addStartButton();
         addNameInput();
+        SoundManager.getInstance().playMusic();
     }
 
     private void addStartButton() {
@@ -116,6 +119,10 @@ public class StartScreen extends GameScreen {
                 leaderboard.remove();
                 leaderboard = null;
             }
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+            SoundManager.getInstance().toggleMute();
         }
     }
 
