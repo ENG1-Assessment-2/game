@@ -18,9 +18,8 @@ class FoodZone extends Building {
 
     @Override
     public int getCost() {
-        return 250 * 1000;
+        return 200 * 1000;
     }
-
 
     @Override
     public String getDescription() {

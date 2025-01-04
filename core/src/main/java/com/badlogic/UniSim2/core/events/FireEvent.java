@@ -6,6 +6,7 @@ import java.util.Random;
 import com.badlogic.UniSim2.core.Round;
 import com.badlogic.UniSim2.core.buildings.Building;
 import com.badlogic.UniSim2.core.buildings.BuildingRemovalException;
+import com.badlogic.UniSim2.resources.Consts;
 
 public class FireEvent extends Event {
 
@@ -14,8 +15,8 @@ public class FireEvent extends Event {
     public FireEvent(Round round) {
         super(
                 "There's Been A Fire!",
-                "One of your buildings has burnt down! Replace it within 15 seconds to avoid losing score.",
-                5,
+                "One of your buildings has burnt down! Replace it within 30 seconds to avoid losing score.",
+                (int) (Consts.MAX_TIME * Math.random()),
                 round
         );
         this.destroyedBuilding = null;
@@ -29,7 +30,7 @@ public class FireEvent extends Event {
             destroyedBuilding = buildings.get(rand.nextInt(buildings.size()));
             try {
                 round.removeBuilding(destroyedBuilding.getRow(), destroyedBuilding.getCol());
-                waitForResponse(15);
+                waitForResponse(30);
             } catch (BuildingRemovalException e) {
             }
 

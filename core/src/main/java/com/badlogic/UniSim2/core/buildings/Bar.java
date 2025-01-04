@@ -18,7 +18,7 @@ class Bar extends Building {
 
     @Override
     public int getCost() {
-        return 150 * 1000;
+        return 300 * 1000;
     }
 
     @Override

@@ -45,7 +45,7 @@ public class Round {
         this.elapsedTime = 0;
         this.isPaused = false;
         this.selectedBuildingType = null;
-        this.funds = 500000;
+        this.funds = 1000 * 1000;
         this.timeSinceLastPay = 0;
         this.completedAchievements = new HashSet<>();
         this.events = new HashSet<>(Arrays.asList(
@@ -71,8 +71,8 @@ public class Round {
 
         elapsedTime += delta;
 
-        if (timeSinceLastPay >= 3) {
-            funds += 30000;
+        if (timeSinceLastPay >= 5) {
+            funds += 100 * 1000;
             timeSinceLastPay = 0;
         } else {
             timeSinceLastPay += delta;

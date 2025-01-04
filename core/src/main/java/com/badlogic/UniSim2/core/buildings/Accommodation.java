@@ -18,7 +18,7 @@ class Accommodation extends Building {
 
     @Override
     public int getCost() {
-        return 200 * 1000;
+        return 240 * 1000;
     }
 
     @Override

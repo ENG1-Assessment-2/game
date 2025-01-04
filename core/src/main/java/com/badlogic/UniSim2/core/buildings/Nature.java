@@ -18,7 +18,7 @@ class Nature extends Building {
 
     @Override
     public int getCost() {
-        return 50 * 1000;
+        return 100 * 1000;
     }
 
     @Override
