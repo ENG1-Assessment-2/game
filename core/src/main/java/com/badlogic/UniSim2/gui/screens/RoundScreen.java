@@ -101,7 +101,6 @@ public class RoundScreen extends GameScreen {
 
         for (Achievement achievement : round.getCompletedAchievements()) {
             if (!announcedAchievements.contains(achievement)) {
-                System.out.println("Achievement Unlocked: " + achievement.getName());
                 announcedAchievements.add(achievement);
                 PopupTextboxActor popup = new PopupTextboxActor(
                         "Achievement Unlocked: " + achievement.getName() + "\n" + achievement.getDescription(),
