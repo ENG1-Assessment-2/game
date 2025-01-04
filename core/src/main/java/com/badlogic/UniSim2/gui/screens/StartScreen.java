@@ -1,10 +1,19 @@
 package com.badlogic.UniSim2.gui.screens;
 
+import java.util.List;
+
+import com.badlogic.UniSim2.gui.TextboxActor;
 import com.badlogic.UniSim2.resources.Assets;
 import com.badlogic.UniSim2.resources.Consts;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.BaseDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -15,17 +24,22 @@ public class StartScreen extends GameScreen {
     @FunctionalInterface
     public interface StartScreenCallback {
 
-        void onStartGame();
+        void onStartGame(String name);
     }
 
     private final StartScreenCallback callback;
     private ImageButton startButton;
     private final SpriteBatch spriteBatch;
+    private TextField nameInput;
+    private TextboxActor leaderboard;
+    private final List<String> leaderboardEntries;
 
-    public StartScreen(StartScreenCallback callback) {
+    public StartScreen(StartScreenCallback callback, List<String> leaderboardEntries) {
         this.callback = callback;
+        this.leaderboardEntries = leaderboardEntries;
         this.spriteBatch = new SpriteBatch();
         addStartButton();
+        addNameInput();
     }
 
     private void addStartButton() {
@@ -47,11 +61,32 @@ public class StartScreen extends GameScreen {
         startButton.setPosition(Consts.START_BUTTON_X, Consts.START_BUTTON_Y);
     }
 
+    private void addNameInput() {
+        BitmapFont font = new BitmapFont();
+        font.getData().setScale(2.5f, 2);
+        Drawable background = new BaseDrawable();
+
+        TextField.TextFieldStyle textFieldStyle = new TextField.TextFieldStyle();
+        textFieldStyle.font = font;
+        textFieldStyle.fontColor = Color.BLACK;
+        textFieldStyle.background = background;
+        textFieldStyle.cursor = null;
+        textFieldStyle.selection = null;
+
+        nameInput = new TextField("", textFieldStyle);
+        nameInput.setMessageText("Enter your name");
+        nameInput.setSize(Consts.NAME_INPUT_WIDTH, Consts.NAME_INPUT_HEIGHT);
+        nameInput.setPosition(Consts.NAME_INPUT_X, Consts.NAME_INPUT_Y);
+        stage.addActor(nameInput);
+    }
+
     private void addStartButtonClick() {
         startButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                callback.onStartGame();
+                if (nameInput.getText().length() > 0) {
+                    callback.onStartGame(nameInput.getText());
+                }
             }
         });
         stage.addActor(startButton);
@@ -71,6 +106,17 @@ public class StartScreen extends GameScreen {
         ScreenUtils.clear(Consts.BACKGROUND_COLOR);
         drawBackground();
         super.render(delta);
+
+        if (Gdx.input.isKeyJustPressed(Keys.L)) {
+            if (leaderboard == null) {
+                String text = !leaderboardEntries.isEmpty() ? "Leaderboard:\n" + String.join("\n", leaderboardEntries) : "No entries yet";
+                leaderboard = new TextboxActor(text, 30, Consts.WORLD_HEIGHT - 30, Consts.WORLD_WIDTH - 60);
+                stage.addActor(leaderboard);
+            } else {
+                leaderboard.remove();
+                leaderboard = null;
+            }
+        }
     }
 
     @Override

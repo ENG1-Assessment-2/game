@@ -31,7 +31,12 @@ public class Consts {
     public static final int START_BUTTON_WIDTH = scaleToCellSize(10);
     public static final int START_BUTTON_HEIGHT = scaleToCellSize(6);
     public static final int START_BUTTON_X = WORLD_WIDTH / 2 - START_BUTTON_WIDTH / 2;
-    public static final int START_BUTTON_Y = WORLD_HEIGHT / 2 - START_BUTTON_HEIGHT / 2 - scaleToCellSize(5);
+    public static final int START_BUTTON_Y = WORLD_HEIGHT / 2 - START_BUTTON_HEIGHT / 2 - scaleToCellSize(6);
+
+    public static final int NAME_INPUT_WIDTH = scaleToCellSize(15);
+    public static final int NAME_INPUT_HEIGHT = scaleToCellSize(6);
+    public static final int NAME_INPUT_X = WORLD_WIDTH / 2 - NAME_INPUT_WIDTH / 2;
+    public static final int NAME_INPUT_Y = WORLD_HEIGHT / 2 - NAME_INPUT_HEIGHT / 2 - scaleToCellSize(2);
 
     public static final Color BACKGROUND_COLOR = new Color(Color.BLACK);
 
@@ -82,7 +87,7 @@ public class Consts {
     public static final int TIMER_Y = WORLD_HEIGHT - scaleToCellSize(2);
     public static final int TIMER_SIZE = 3;
     public static final Color TIMER_COLOR = new Color(Color.BLACK);
-    public static final int MAX_TIME = 300;
+    public static final int MAX_TIME = 10;
 
     public static final int FUNDS_X = scaleToCellSize(4);
     public static final int FUNDS_Y = WORLD_HEIGHT - scaleToCellSize(5);
