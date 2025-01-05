@@ -1,5 +1,8 @@
 package com.badlogic.UniSim2.core.buildings;
 
+/**
+ * Represents a bar building in the game.
+ */
 class Bar extends Building {
 
     public Bar(int row, int col) {
@@ -18,7 +21,7 @@ class Bar extends Building {
 
     @Override
     public int getCost() {
-        return 150 * 1000;
+        return 300 * 1000;
     }
 
     @Override

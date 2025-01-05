@@ -1,15 +1,14 @@
 package com.badlogic.UniSim2.resources;
 
-import com.badlogic.UniSim2.Main;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 
 /**
- * This class is used to store all textures that will be used in the game. All
- * textures are made public static variable and should not be changed by another
- * other class.
+ * This class is used to store all textures, sounds, and music that will be used
+ * in the game. All assets are made public static variables and should not be
+ * changed by other classes.
  */
 public class Assets {
 
@@ -59,19 +58,18 @@ public class Assets {
     public static Texture natureCollisionTexture;
     public static Texture natureDraggingTexture;
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private Assets() {
     }
 
     /**
-     * This method loads all the textures that might be used. Note that this
-     * method should not be called before libgdx has called the
-     * {@link Main#create()} method.
+     * Loads all the textures, sounds, and music that might be used in the game.
      */
     public static void loadTextures() {
 
-        // =======================================
-        // SOUND EFFECTS AND MUSIC.
-        // =======================================
+        // Sounds and music
         music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
         click = Gdx.audio.newSound(Gdx.files.internal("sounds/click.mp3"));
 
@@ -86,9 +84,6 @@ public class Assets {
 
         menuBarTexture = new Texture("menuBar.png");
 
-        // =======================================
-        // BUTTON TEXTURES
-        // =======================================
         // Building button textures when not hovering over
         accommodationButtonUpTexture = new Texture("textures/buttons/accommodationButtonUp.png");
         lectureHallButtonUpTexture = new Texture("textures/buttons/lectureHallButtonUp.png");
@@ -117,9 +112,7 @@ public class Assets {
             natureButtonDownTexture
         };
 
-        // =======================================
-        // BUILDING SPRITE TEXTURES
-        // =======================================
+        // Building textures
         accommodationPlacedTexture = new Texture("textures/buildings/accommodationPlaced.png");
         accommodationCollisionTexture = new Texture("textures/buildings/accommodationCollision.png");
         accommodationDraggingTexture = new Texture("textures/buildings/accommodationDragging.png");

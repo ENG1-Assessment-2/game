@@ -14,12 +14,16 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
+/**
+ * Represents the map in the game, including all UI related to the buildings and
+ * the grid.
+ */
 public class Map {
 
     private final Stage stage;
     private final Round round;
 
-    final private ArrayList<BuildingImage> placedBuildingImages;
+    private final ArrayList<BuildingImage> placedBuildingImages;
     private BuildingImage placingBuildingImage;
     private BuildingImage movingBuildingImage;
 
@@ -35,6 +39,13 @@ public class Map {
         stage.addActor(new GridActor());
     }
 
+    /**
+     * Handles user input.
+     *
+     * @param mousePos The current mouse position.
+     * @param clicked Whether the mouse was clicked.
+     * @param rightClicked Whether the right mouse button was clicked.
+     */
     public void input(Vector2 mousePos, boolean clicked, boolean rightClicked) {
         if (mousePos.x < Consts.MENU_BAR_WIDTH) {
             return;
@@ -72,6 +83,11 @@ public class Map {
         updateMovingBuildingImage(placingBuildingGridPosition);
     }
 
+    /**
+     * Handles the movement of buildings.
+     *
+     * @param gridPosition The grid position to move the building to.
+     */
     private void handleBuildingMovement(Vector2 gridPosition) {
         if (round.getIsMovingBuilding()) {
             try {
@@ -80,6 +96,7 @@ public class Map {
                         Math.round(gridPosition.x)
                 );
             } catch (BuildingPlacementException e) {
+                // No handling needed.
             }
 
         } else {
@@ -90,6 +107,12 @@ public class Map {
         }
     }
 
+    /**
+     * Places a building on the grid.
+     *
+     * @param type The type of building to place.
+     * @param gridPosition The grid position to place the building at.
+     */
     private void placeBuilding(BuildingType type, Vector2 gridPosition) {
         try {
             round.placeBuilding(
@@ -100,20 +123,33 @@ public class Map {
             SoundManager.getInstance().playClick();
             round.selectBuildingType(null);
         } catch (BuildingPlacementException e) {
+            // No handling needed.
         }
     }
 
+    /**
+     * Removes a building from the grid.
+     *
+     * @param gridPosition The grid position of the building to remove.
+     */
     private void removeBuilding(Vector2 gridPosition) {
         try {
             round.removeBuilding(
                     Math.round(gridPosition.y),
                     Math.round(gridPosition.x)
             );
-
         } catch (BuildingRemovalException e) {
+            // No handling needed.
         }
     }
 
+    /**
+     * Updates the image of the building being placed.
+     *
+     * @param type The type of building being placed.
+     * @param position The screen position of the building.
+     * @param gridPosition The grid position of the building.
+     */
     private void updatePlacingBuildingImage(BuildingType type, Vector2 position, Vector2 gridPosition) {
         if (type == null) {
             // remove placing building image
@@ -147,6 +183,13 @@ public class Map {
         }
     }
 
+    /**
+     * Converts the mouse position to the quantized position of a building at
+     * that position.
+     *
+     * @param mousePos The current mouse position.
+     * @return The building position.
+     */
     private Vector2 getBuildingPosition(Vector2 mousePos) {
         Vector2 gridPosition = new Vector2(
                 (mousePos.x - Consts.MENU_BAR_WIDTH) / Consts.CELL_SIZE,
@@ -162,6 +205,13 @@ public class Map {
         );
     }
 
+    /**
+     * Converts the screen position to the grid position, relative to the
+     * grid-size.
+     *
+     * @param position The screen position.
+     * @return The grid position.
+     */
     private Vector2 getGridPosition(Vector2 position) {
         return new Vector2(
                 ((position.x - Consts.MENU_BAR_WIDTH) / Consts.CELL_SIZE),
@@ -169,8 +219,11 @@ public class Map {
         );
     }
 
+    /**
+     * Adds the background to the stage.
+     */
     private void addBackground() {
-        // Draw grass
+        // Draw background
         Image background = new Image(Assets.backgroundTexture);
         background.setBounds(0, 0, Consts.WORLD_WIDTH, Consts.WORLD_HEIGHT);
         stage.addActor(background);
@@ -181,6 +234,9 @@ public class Map {
         stage.addActor(paths);
     }
 
+    /**
+     * Updates the images of the placed buildings.
+     */
     private void updatePlacedBuildingImages() {
         for (BuildingImage image : placedBuildingImages) {
             image.remove();
@@ -198,6 +254,11 @@ public class Map {
         }
     }
 
+    /**
+     * Updates the image of the building being moved.
+     *
+     * @param gridPosition The grid position of the building.
+     */
     private void updateMovingBuildingImage(Vector2 gridPosition) {
         if (movingBuildingImage != null) {
             movingBuildingImage.remove();

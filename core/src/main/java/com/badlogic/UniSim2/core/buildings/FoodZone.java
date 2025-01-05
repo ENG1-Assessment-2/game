@@ -1,5 +1,8 @@
 package com.badlogic.UniSim2.core.buildings;
 
+/**
+ * Represents a food zone building in the game.
+ */
 class FoodZone extends Building {
 
     public FoodZone(int row, int col) {
@@ -18,9 +21,8 @@ class FoodZone extends Building {
 
     @Override
     public int getCost() {
-        return 250 * 1000;
+        return 200 * 1000;
     }
-
 
     @Override
     public String getDescription() {

@@ -6,6 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 
+/**
+ * A label that displays the student satisfaction score of the round.
+ */
 public class SatisfactionLabel extends Label {
 
     private final Round round;
@@ -20,6 +23,9 @@ public class SatisfactionLabel extends Label {
         setPosition(Consts.SATISFACTION_X, Consts.SATISFACTION_Y, Align.center);
     }
 
+    /**
+     * Updates the label text based on the round's student satisfaction score.
+     */
     public void update() {
         setText("Score:\n" + round.getStudentSatisfaction());
     }

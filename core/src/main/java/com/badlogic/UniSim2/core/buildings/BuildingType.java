@@ -4,6 +4,9 @@ import java.util.function.BiFunction;
 
 import com.badlogic.UniSim2.resources.Consts;
 
+/**
+ * Enum representing different types of buildings in the game.
+ */
 public enum BuildingType {
     ACCOMMODATION(
             Consts.ACCOMMODATION_WIDTH,
@@ -35,12 +38,26 @@ public enum BuildingType {
     private final int height;
     private final BiFunction<Integer, Integer, Building> factory;
 
+    /**
+     * Constructs a new BuildingType.
+     *
+     * @param width The width of the building type.
+     * @param height The height of the building type.
+     * @param factory The factory function to create a building of this type.
+     */
     BuildingType(int width, int height, BiFunction<Integer, Integer, Building> factory) {
         this.width = width;
         this.height = height;
         this.factory = factory;
     }
 
+    /**
+     * Creates a new building of this type at the specified position.
+     *
+     * @param row The row position.
+     * @param col The column position.
+     * @return The created building.
+     */
     public Building create(int row, int col) {
         return factory.apply(row, col);
     }

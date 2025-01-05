@@ -6,7 +6,11 @@ import java.util.Random;
 import com.badlogic.UniSim2.core.Round;
 import com.badlogic.UniSim2.core.buildings.Building;
 import com.badlogic.UniSim2.core.buildings.BuildingRemovalException;
+import com.badlogic.UniSim2.resources.Consts;
 
+/**
+ * Represents a fire event in the game where a building is destroyed by fire.
+ */
 public class FireEvent extends Event {
 
     private Building destroyedBuilding;
@@ -14,13 +18,17 @@ public class FireEvent extends Event {
     public FireEvent(Round round) {
         super(
                 "There's Been A Fire!",
-                "One of your buildings has burnt down! Replace it within 15 seconds to avoid losing score.",
-                5,
+                "One of your buildings has burnt down! Replace it within 30 seconds to avoid losing score.",
+                (int) (Consts.MAX_TIME * Math.random()),
                 round
         );
         this.destroyedBuilding = null;
     }
 
+    /**
+     * Handles the triggering of the fire event. Randomly selects a building to
+     * be destroyed by fire.
+     */
     @Override
     protected void handleTrigger() {
         Random rand = new Random();
@@ -29,13 +37,17 @@ public class FireEvent extends Event {
             destroyedBuilding = buildings.get(rand.nextInt(buildings.size()));
             try {
                 round.removeBuilding(destroyedBuilding.getRow(), destroyedBuilding.getCol());
-                waitForResponse(15);
+                waitForResponse(30);
             } catch (BuildingRemovalException e) {
+                // Handling not needed.
             }
-
         }
     }
 
+    /**
+     * Handles the response to the fire event. If the destroyed building is not
+     * replaced within the response time, the satisfaction is reduced by 100.
+     */
     @Override
     protected void handleResponse() {
         if (!getIsBuildingReplaced()) {
@@ -43,6 +55,11 @@ public class FireEvent extends Event {
         }
     }
 
+    /**
+     * Checks if the destroyed building has been replaced.
+     *
+     * @return True if the building has been replaced, false otherwise.
+     */
     private boolean getIsBuildingReplaced() {
         Building replacementBuilding = round.getBuildingAt(destroyedBuilding.getRow(), destroyedBuilding.getCol());
 

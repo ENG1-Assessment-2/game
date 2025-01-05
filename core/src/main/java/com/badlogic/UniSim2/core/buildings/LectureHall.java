@@ -1,5 +1,8 @@
 package com.badlogic.UniSim2.core.buildings;
 
+/**
+ * Represents a lecture hall building in the game.
+ */
 class LectureHall extends Building {
 
     public LectureHall(int row, int col) {

@@ -1,5 +1,8 @@
 package com.badlogic.UniSim2.core.buildings;
 
+/**
+ * Represents a nature plot in the game.
+ */
 class Nature extends Building {
 
     public Nature(int row, int col) {
@@ -18,7 +21,7 @@ class Nature extends Building {
 
     @Override
     public int getCost() {
-        return 50 * 1000;
+        return 100 * 1000;
     }
 
     @Override

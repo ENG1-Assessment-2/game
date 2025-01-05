@@ -5,7 +5,9 @@ import java.util.List;
 import com.badlogic.UniSim2.gui.TextboxActor;
 import com.badlogic.UniSim2.resources.Assets;
 import com.badlogic.UniSim2.resources.Consts;
+import com.badlogic.UniSim2.resources.SoundManager;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -19,8 +21,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+/**
+ * Represents the start screen of the game. Allows the player to enter their
+ * name, start the game and view the leaderboard.
+ */
 public class StartScreen extends GameScreen {
 
+    /**
+     * Callback interface for handling the start of the game.
+     */
     @FunctionalInterface
     public interface StartScreenCallback {
 
@@ -40,13 +49,20 @@ public class StartScreen extends GameScreen {
         this.spriteBatch = new SpriteBatch();
         addStartButton();
         addNameInput();
+        SoundManager.getInstance().playMusic();
     }
 
+    /**
+     * Adds the start button to the screen.
+     */
     private void addStartButton() {
         setupStartButton();
         addStartButtonClick();
     }
 
+    /**
+     * Sets up the start button.
+     */
     private void setupStartButton() {
         Drawable startButtonUpDrawable = new TextureRegionDrawable(Assets.startButtonUpTexture);
         Drawable startButtonDownDrawable = new TextureRegionDrawable(Assets.startButtonDownTexture);
@@ -61,6 +77,9 @@ public class StartScreen extends GameScreen {
         startButton.setPosition(Consts.START_BUTTON_X, Consts.START_BUTTON_Y);
     }
 
+    /**
+     * Adds the name input field to the screen.
+     */
     private void addNameInput() {
         BitmapFont font = new BitmapFont();
         font.getData().setScale(2.5f, 2);
@@ -80,6 +99,9 @@ public class StartScreen extends GameScreen {
         stage.addActor(nameInput);
     }
 
+    /**
+     * Adds the click listener to the start button.
+     */
     private void addStartButtonClick() {
         startButton.addListener(new ClickListener() {
             @Override
@@ -92,6 +114,9 @@ public class StartScreen extends GameScreen {
         stage.addActor(startButton);
     }
 
+    /**
+     * Draws the background of the screen.
+     */
     private void drawBackground() {
         ScreenUtils.clear(Consts.BACKGROUND_COLOR);
         viewport.apply();
@@ -101,6 +126,11 @@ public class StartScreen extends GameScreen {
         spriteBatch.end();
     }
 
+    /**
+     * Renders the screen.
+     *
+     * @param delta The time in seconds since the last render.
+     */
     @Override
     public void render(float delta) {
         ScreenUtils.clear(Consts.BACKGROUND_COLOR);
@@ -116,6 +146,10 @@ public class StartScreen extends GameScreen {
                 leaderboard.remove();
                 leaderboard = null;
             }
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+            SoundManager.getInstance().toggleMute();
         }
     }
 

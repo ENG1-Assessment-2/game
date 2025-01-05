@@ -1,5 +1,8 @@
 package com.badlogic.UniSim2.core.buildings;
 
+/**
+ * Represents an accommodation building in the game.
+ */
 class Accommodation extends Building {
 
     public Accommodation(int row, int col) {
@@ -18,7 +21,7 @@ class Accommodation extends Building {
 
     @Override
     public int getCost() {
-        return 200 * 1000;
+        return 240 * 1000;
     }
 
     @Override

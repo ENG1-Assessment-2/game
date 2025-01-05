@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Represents the sidebar-menu in the game, and manages its elements.
+ */
 public class Menu {
 
     private final Skin skin;
@@ -41,6 +44,44 @@ public class Menu {
         createBuildingButtons();
     }
 
+    /**
+     * Creates the menu bar image.
+     *
+     * @return The created menu bar image.
+     */
+    private Image createMenuBar() {
+        Image b = new Image(Assets.menuBarTexture);
+        b.setSize(Consts.MENU_BAR_WIDTH, Consts.MENU_BAR_HEIGHT);
+        b.setPosition(Consts.MENU_BAR_X, Consts.MENU_BAR_Y);
+        return b;
+    }
+
+    /**
+     * Creates the building buttons and adds them to the stage.
+     */
+    private void createBuildingButtons() {
+        int buttonGap = Consts.BUILDING_BUTTON_GAP;
+        int yPosition = Consts.BUILDING_BUTTON_Y_BOUNDARY;
+
+        for (BuildingType type : BuildingType.values()) {
+            BuildingButton button = new BuildingButton(
+                    type,
+                    round,
+                    yPosition - buttonGap,
+                    skin,
+                    this::handleBuildingSelected
+            );
+
+            buildingButtons.add(button);
+            stage.addActor(button);
+            stage.addActor(button.getCountLabel());
+            yPosition -= buttonGap;
+        }
+    }
+
+    /**
+     * Updates the menu elements.
+     */
     public void update() {
         timerLabel.update();
         fundsLabel.update();
@@ -69,33 +110,11 @@ public class Menu {
         }
     }
 
-    private Image createMenuBar() {
-        Image b = new Image(Assets.menuBarTexture);
-        b.setSize(Consts.MENU_BAR_WIDTH, Consts.MENU_BAR_HEIGHT);
-        b.setPosition(Consts.MENU_BAR_X, Consts.MENU_BAR_Y);
-        return b;
-    }
-
-    private void createBuildingButtons() {
-        int buttonGap = Consts.BUILDING_BUTTON_GAP;
-        int yPosition = Consts.BUILDING_BUTTON_Y_BOUNDARY;
-
-        for (BuildingType type : BuildingType.values()) {
-            BuildingButton button = new BuildingButton(
-                    type,
-                    round,
-                    yPosition - buttonGap,
-                    skin,
-                    this::handleBuildingSelected
-            );
-
-            buildingButtons.add(button);
-            stage.addActor(button);
-            stage.addActor(button.getCountLabel());
-            yPosition -= buttonGap;
-        }
-    }
-
+    /**
+     * The callback of the building buttons.
+     *
+     * @param type The selected building type.
+     */
     private void handleBuildingSelected(BuildingType type) {
         SoundManager.getInstance().playClick();
 
