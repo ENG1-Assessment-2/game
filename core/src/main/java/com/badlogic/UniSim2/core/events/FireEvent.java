@@ -8,6 +8,9 @@ import com.badlogic.UniSim2.core.buildings.Building;
 import com.badlogic.UniSim2.core.buildings.BuildingRemovalException;
 import com.badlogic.UniSim2.resources.Consts;
 
+/**
+ * Represents a fire event in the game where a building is destroyed by fire.
+ */
 public class FireEvent extends Event {
 
     private Building destroyedBuilding;
@@ -22,6 +25,10 @@ public class FireEvent extends Event {
         this.destroyedBuilding = null;
     }
 
+    /**
+     * Handles the triggering of the fire event. Randomly selects a building to
+     * be destroyed by fire.
+     */
     @Override
     protected void handleTrigger() {
         Random rand = new Random();
@@ -32,11 +39,15 @@ public class FireEvent extends Event {
                 round.removeBuilding(destroyedBuilding.getRow(), destroyedBuilding.getCol());
                 waitForResponse(30);
             } catch (BuildingRemovalException e) {
+                // Handling not needed.
             }
-
         }
     }
 
+    /**
+     * Handles the response to the fire event. If the destroyed building is not
+     * replaced within the response time, the satisfaction is reduced by 100.
+     */
     @Override
     protected void handleResponse() {
         if (!getIsBuildingReplaced()) {
@@ -44,6 +55,11 @@ public class FireEvent extends Event {
         }
     }
 
+    /**
+     * Checks if the destroyed building has been replaced.
+     *
+     * @return True if the building has been replaced, false otherwise.
+     */
     private boolean getIsBuildingReplaced() {
         Building replacementBuilding = round.getBuildingAt(destroyedBuilding.getRow(), destroyedBuilding.getCol());
 

@@ -6,6 +6,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
 
+/**
+ * A label that displays the current funds.
+ */
 public class FundsLabel extends Label {
 
     private final Round round;
@@ -20,6 +23,9 @@ public class FundsLabel extends Label {
         setPosition(Consts.FUNDS_X, Consts.FUNDS_Y, Align.center);
     }
 
+    /**
+     * Updates the label text based on the round's current funds.
+     */
     public void update() {
         setText("£" + Math.round(round.getFunds() / 1000.0) + "k");
     }

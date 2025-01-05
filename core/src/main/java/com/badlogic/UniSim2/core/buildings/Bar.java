@@ -1,5 +1,8 @@
 package com.badlogic.UniSim2.core.buildings;
 
+/**
+ * Represents a bar building in the game.
+ */
 class Bar extends Building {
 
     public Bar(int row, int col) {

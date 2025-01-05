@@ -20,6 +20,10 @@ import com.badlogic.UniSim2.core.events.GrantEvent;
 import com.badlogic.UniSim2.core.events.RoyalEvent;
 import com.badlogic.UniSim2.resources.Consts;
 
+/**
+ * Represents a single round of the game and manages the state of the grid,
+ * buildings, events, achievements, and currency.
+ */
 public class Round {
 
     private final Set<Achievement> ALL_ACHIEVEMENTS = new HashSet<>(Arrays.asList(
@@ -55,6 +59,7 @@ public class Round {
         ));
         this.triggeredEvents = new HashSet<>();
 
+        // Initialize paths on the grid
         grid.placePath(38, 0, 2, 38);
         grid.placePath(38, 17, 2, 38);
         grid.placePath(38, 51, 2, 38);
@@ -64,6 +69,11 @@ public class Round {
         grid.placePath(24, 0, 66, 2);
     }
 
+    /**
+     * Updates the state of the round.
+     *
+     * @param delta The time elapsed since the last update.
+     */
     public void update(float delta) {
         if (isPaused || elapsedTime >= Consts.MAX_TIME) {
             return;
@@ -78,12 +88,14 @@ public class Round {
             timeSinceLastPay += delta;
         }
 
+        // Check for completed achievements
         for (Achievement achievement : ALL_ACHIEVEMENTS) {
             if (!completedAchievements.contains(achievement) && achievement.getCompleted(this)) {
                 completedAchievements.add(achievement);
             }
         }
 
+        // Update and attempt to trigger events
         for (Event event : events) {
             event.update(delta);
 
@@ -102,10 +114,23 @@ public class Round {
         return triggeredEvents;
     }
 
+    /**
+     * Calculates and returns the student satisfaction score. The satisfaction
+     * score is calculated based on the buildings placed on the grid, the
+     * diversity of building types, and previous responses to events.
+     *
+     * @return The student satisfaction score.
+     */
     public int getStudentSatisfaction() {
         return ((int) (getStudentSatisfactionFromBuildings() * getDiversityFactor())) + satisfactionAddend;
     }
 
+    /**
+     * Calculates the student satisfaction score based on the buildings on the
+     * grid.
+     *
+     * @return The student satisfaction score from buildings.
+     */
     private int getStudentSatisfactionFromBuildings() {
         int s = 0;
 
@@ -159,6 +184,12 @@ public class Round {
         return s;
     }
 
+    /**
+     * Calculates the diversity factor based on the distribution of building
+     * types.
+     *
+     * @return The diversity factor.
+     */
     private double getDiversityFactor() {
         List<Integer> buildingCounts = new ArrayList<>();
         for (BuildingType type : BuildingType.values()) {
@@ -181,6 +212,14 @@ public class Round {
         return grid.getPlacedBuildings();
     }
 
+    /**
+     * Places a building on the grid.
+     *
+     * @param type The type of building to place.
+     * @param row The row position to place the building.
+     * @param col The column position to place the building.
+     * @throws BuildingPlacementException If the building cannot be placed.
+     */
     public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
         int buildingCost = type.create(0, 0).getCost();
         if (funds < buildingCost) {
@@ -190,6 +229,14 @@ public class Round {
         grid.placeBuilding(type, row, col);
     }
 
+    /**
+     * Removes a building from the grid.
+     *
+     * @param row The row position of the building to remove.
+     * @param col The column position of the building to remove.
+     * @return The removed building.
+     * @throws BuildingRemovalException If the building cannot be removed.
+     */
     public Building removeBuilding(int row, int col) throws BuildingRemovalException {
         Building building = grid.getBuildingAt(row, col);
         if (building == null) {
@@ -203,6 +250,12 @@ public class Round {
         return grid.removeBuilding(row, col);
     }
 
+    /**
+     * Selects a building to move.
+     *
+     * @param row The row position of the building to move.
+     * @param col The column position of the building to move.
+     */
     public void selectBuildingToMove(int row, int col) {
         if (movingBuilding != null) {
             return;
@@ -214,9 +267,13 @@ public class Round {
 
             grid.removeBuilding(row, col);
         } catch (BuildingRemovalException e) {
+            // No handling needed.
         }
     }
 
+    /**
+     * Cancels the moving of a building.
+     */
     public void cancelMoveBuilding() {
         if (movingBuilding == null) {
             return;
@@ -226,6 +283,7 @@ public class Round {
             grid.placeBuilding(movingBuilding.getType(), movingBuilding.getRow(), movingBuilding.getCol());
             movingBuilding = null;
         } catch (BuildingPlacementException e) {
+            // No handling needed.
         }
     }
 
@@ -237,6 +295,13 @@ public class Round {
         return movingBuilding;
     }
 
+    /**
+     * Moves a building to a new position.
+     *
+     * @param row The new row position.
+     * @param col The new column position.
+     * @throws BuildingPlacementException If the building cannot be moved.
+     */
     public void moveBuilding(int row, int col) throws BuildingPlacementException {
         if (movingBuilding == null) {
             return;

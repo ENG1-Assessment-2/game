@@ -1,5 +1,8 @@
 package com.badlogic.UniSim2.core.buildings;
 
+/**
+ * Represents a nature plot in the game.
+ */
 class Nature extends Building {
 
     public Nature(int row, int col) {

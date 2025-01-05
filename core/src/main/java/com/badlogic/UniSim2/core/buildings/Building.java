@@ -1,5 +1,9 @@
 package com.badlogic.UniSim2.core.buildings;
 
+/**
+ * Represents an abstract building in the game. Subclasses should implement the
+ * getCost, getName, and getDescription methods.
+ */
 public abstract class Building {
 
     private final int width;
@@ -36,6 +40,15 @@ public abstract class Building {
         return type;
     }
 
+    /**
+     * Checks if this building overlaps with another building of the specified
+     * type at the given position.
+     *
+     * @param type The type of the other building.
+     * @param row The row position of the other building.
+     * @param col The column position of the other building.
+     * @return True if the buildings overlap, false otherwise.
+     */
     public boolean overlaps(BuildingType type, int row, int col) {
         boolean rowOverlaps = this.row - this.height < row && this.row > row - type.getHeight();
         boolean colOverlaps = this.col + this.width > col && this.col < col + type.getWidth();

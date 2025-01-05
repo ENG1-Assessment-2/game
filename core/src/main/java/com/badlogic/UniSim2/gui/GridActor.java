@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
+/**
+ * An actor that draws the grid on the game map.
+ */
 public class GridActor extends Actor {
 
     private final ShapeRenderer shapeRenderer;
@@ -14,6 +17,12 @@ public class GridActor extends Actor {
         setColor(Consts.GRID_COLOR);
     }
 
+    /**
+     * Draws the grid.
+     *
+     * @param batch The batch used for drawing.
+     * @param parentAlpha The parent alpha.
+     */
     @Override
     public void draw(Batch batch, float parentAlpha) {
         // Need to end batch before using ShapeRenderer
@@ -37,10 +46,9 @@ public class GridActor extends Actor {
 
         shapeRenderer.end();
 
-        // Restart batch for next actor
         batch.begin();
     }
-
+    
     public void dispose() {
         shapeRenderer.dispose();
     }

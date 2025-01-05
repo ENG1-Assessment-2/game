@@ -11,6 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Array;
 
+/**
+ * Represents the sidebar-menu in the game, and manages its elements.
+ */
 public class Menu {
 
     private final Skin skin;
@@ -41,6 +44,11 @@ public class Menu {
         createBuildingButtons();
     }
 
+    /**
+     * Creates the menu bar image.
+     *
+     * @return The created menu bar image.
+     */
     private Image createMenuBar() {
         Image b = new Image(Assets.menuBarTexture);
         b.setSize(Consts.MENU_BAR_WIDTH, Consts.MENU_BAR_HEIGHT);
@@ -48,6 +56,9 @@ public class Menu {
         return b;
     }
 
+    /**
+     * Creates the building buttons and adds them to the stage.
+     */
     private void createBuildingButtons() {
         int buttonGap = Consts.BUILDING_BUTTON_GAP;
         int yPosition = Consts.BUILDING_BUTTON_Y_BOUNDARY;
@@ -68,6 +79,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Updates the menu elements.
+     */
     public void update() {
         timerLabel.update();
         fundsLabel.update();
@@ -96,6 +110,11 @@ public class Menu {
         }
     }
 
+    /**
+     * The callback of the building buttons.
+     *
+     * @param type The selected building type.
+     */
     private void handleBuildingSelected(BuildingType type) {
         SoundManager.getInstance().playClick();
 

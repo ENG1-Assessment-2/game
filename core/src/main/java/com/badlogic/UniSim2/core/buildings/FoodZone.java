@@ -1,5 +1,8 @@
 package com.badlogic.UniSim2.core.buildings;
 
+/**
+ * Represents a food zone building in the game.
+ */
 class FoodZone extends Building {
 
     public FoodZone(int row, int col) {

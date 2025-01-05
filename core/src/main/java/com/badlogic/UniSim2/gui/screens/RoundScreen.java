@@ -18,8 +18,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+/**
+ * Represents the screen for a round in the game and manages the game map, menu,
+ * and achievements.
+ */
 public class RoundScreen extends GameScreen {
 
+    /**
+     * Interface for the callback to handle the end of the game.
+     */
     @FunctionalInterface
     public interface PlayScreenCallback {
 
@@ -47,6 +54,11 @@ public class RoundScreen extends GameScreen {
         this.activeAchievementsTextbox = null;
     }
 
+    /**
+     * Renders the screen.
+     *
+     * @param delta The time in seconds since the last render.
+     */
     @Override
     public void render(float delta) {
         input();
@@ -62,6 +74,9 @@ public class RoundScreen extends GameScreen {
         popupStage.draw();
     }
 
+    /**
+     * Handles input for the screen.
+     */
     private void input() {
         Vector2 mousePos = new Vector2(Gdx.input.getX(), Gdx.input.getY());
         boolean clicked = Gdx.input.isButtonJustPressed(Input.Buttons.LEFT);
@@ -90,6 +105,9 @@ public class RoundScreen extends GameScreen {
         }
     }
 
+    /**
+     * Updates the state of the screen.
+     */
     private void update() {
         round.update(Gdx.graphics.getDeltaTime());
         menu.update();

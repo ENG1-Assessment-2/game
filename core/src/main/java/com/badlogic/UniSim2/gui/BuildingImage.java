@@ -8,6 +8,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * Represents an image of a building in the game.
+ */
 public class BuildingImage extends Image {
 
     private BuildingType type;
@@ -23,10 +26,18 @@ public class BuildingImage extends Image {
         setSize();
     }
 
+    /**
+     * Sets the image to the placed texture.
+     */
     public void setPlaced() {
         setDrawable(new TextureRegionDrawable(placedTexture));
     }
 
+    /**
+     * Sets the image to the dragging texture.
+     *
+     * @param isColliding Whether the building is colliding with another object.
+     */
     public void setDragging(boolean isColliding) {
         setDrawable(new TextureRegionDrawable(
                 isColliding ? collisionTexture : draggingTexture
@@ -41,6 +52,11 @@ public class BuildingImage extends Image {
         setPosition(position.x, position.y);
     }
 
+    /**
+     * Updates the type of building and reloads the textures.
+     *
+     * @param type The new type of building.
+     */
     public void updateType(BuildingType type) {
         this.type = type;
         loadTextures();
@@ -48,6 +64,9 @@ public class BuildingImage extends Image {
         setSize();
     }
 
+    /**
+     * Loads the textures for the building based on its type.
+     */
     private void loadTextures() {
         switch (type) {
             case ACCOMMODATION:
@@ -80,6 +99,9 @@ public class BuildingImage extends Image {
         }
     }
 
+    /**
+     * Sets the size of the building image based on its type.
+     */
     private void setSize() {
         switch (type) {
             case ACCOMMODATION:

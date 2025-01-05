@@ -13,8 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+/**
+ * A button that selects a building to place.
+ */
 public class BuildingButton extends ImageButton {
 
+    /**
+     * Interface for handling the callback of the button-click.
+     */
     public interface SelectionListener {
 
         void onBuildingSelected(BuildingType type);
@@ -65,10 +71,19 @@ public class BuildingButton extends ImageButton {
         return type;
     }
 
+    /**
+     * Updates the count label.
+     */
     public void update() {
         updateCountLabel();
     }
 
+    /**
+     * Creates the button style based on the building type.
+     *
+     * @param type The type of building.
+     * @return The created button style.
+     */
     static private ImageButtonStyle createButtonStyle(BuildingType type) {
         ImageButtonStyle style = new ImageButtonStyle();
         int index = type.ordinal();
@@ -78,6 +93,10 @@ public class BuildingButton extends ImageButton {
         return style;
     }
 
+    /**
+     * Updates the position of the count label based on the position of the
+     * button.
+     */
     private void updateCountPosition() {
         countLabel.setPosition(
                 getX() + getWidth(),
@@ -85,6 +104,10 @@ public class BuildingButton extends ImageButton {
         );
     }
 
+    /**
+     * Updates the text of the count label based on the number of buildings of
+     * this type.
+     */
     private void updateCountLabel() {
         int count = round.getBuildingCount(type);
         countLabel.setText(String.valueOf(count));

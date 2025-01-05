@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.Color;
  */
 public class Consts {
 
+    /**
+     * Private constructor to prevent instantiation.
+     */
     private Consts() {
     }
 
@@ -25,6 +28,7 @@ public class Consts {
     private static int scaleToCellSize(int value) {
         return value * CELL_SIZE;
     }
+
     public static final int WORLD_WIDTH = scaleToCellSize(75);
     public static final int WORLD_HEIGHT = scaleToCellSize(38);
 
