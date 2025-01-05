@@ -41,6 +41,33 @@ public class Menu {
         createBuildingButtons();
     }
 
+    private Image createMenuBar() {
+        Image b = new Image(Assets.menuBarTexture);
+        b.setSize(Consts.MENU_BAR_WIDTH, Consts.MENU_BAR_HEIGHT);
+        b.setPosition(Consts.MENU_BAR_X, Consts.MENU_BAR_Y);
+        return b;
+    }
+
+    private void createBuildingButtons() {
+        int buttonGap = Consts.BUILDING_BUTTON_GAP;
+        int yPosition = Consts.BUILDING_BUTTON_Y_BOUNDARY;
+
+        for (BuildingType type : BuildingType.values()) {
+            BuildingButton button = new BuildingButton(
+                    type,
+                    round,
+                    yPosition - buttonGap,
+                    skin,
+                    this::handleBuildingSelected
+            );
+
+            buildingButtons.add(button);
+            stage.addActor(button);
+            stage.addActor(button.getCountLabel());
+            yPosition -= buttonGap;
+        }
+    }
+
     public void update() {
         timerLabel.update();
         fundsLabel.update();
@@ -66,33 +93,6 @@ public class Menu {
         if (newTextbox != null) {
             buildingInfoTextbox = newTextbox;
             stage.addActor(buildingInfoTextbox);
-        }
-    }
-
-    private Image createMenuBar() {
-        Image b = new Image(Assets.menuBarTexture);
-        b.setSize(Consts.MENU_BAR_WIDTH, Consts.MENU_BAR_HEIGHT);
-        b.setPosition(Consts.MENU_BAR_X, Consts.MENU_BAR_Y);
-        return b;
-    }
-
-    private void createBuildingButtons() {
-        int buttonGap = Consts.BUILDING_BUTTON_GAP;
-        int yPosition = Consts.BUILDING_BUTTON_Y_BOUNDARY;
-
-        for (BuildingType type : BuildingType.values()) {
-            BuildingButton button = new BuildingButton(
-                    type,
-                    round,
-                    yPosition - buttonGap,
-                    skin,
-                    this::handleBuildingSelected
-            );
-
-            buildingButtons.add(button);
-            stage.addActor(button);
-            stage.addActor(button.getCountLabel());
-            yPosition -= buttonGap;
         }
     }
 

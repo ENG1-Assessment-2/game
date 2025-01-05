@@ -24,6 +24,14 @@ public class Grid {
         this.paths = new ArrayList<>();
     }
 
+    public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
+        if (!getCanPlace(type, row, col)) {
+            throw new BuildingPlacementException("Cannot place building at row " + row + " and col " + col);
+        }
+        Building building = type.create(row, col);
+        buildings.add(building);
+    }
+
     public void moveBuilding(Building building, int row, int col) throws BuildingPlacementException {
         if (!getCanPlace(building.getType(), row, col)) {
             throw new BuildingPlacementException("Cannot place building at row " + row + " and col " + col);
@@ -31,10 +39,6 @@ public class Grid {
 
         placeBuilding(building.getType(), row, col);
         buildings.remove(building);
-    }
-
-    public List<Building> getPlacedBuildings() {
-        return buildings;
     }
 
     public Building removeBuilding(int row, int col) throws BuildingRemovalException {
@@ -48,38 +52,6 @@ public class Grid {
         throw new BuildingRemovalException("There is no building at row " + row + " col " + col);
     }
 
-    public boolean getIsBuildingAt(int row, int col) {
-        for (Building building : buildings) {
-            if (isBuildingAt(building, row, col)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public Building getBuildingAt(int row, int col) {
-        for (Building building : buildings) {
-            if (isBuildingAt(building, row, col)) {
-                return building;
-            }
-        }
-        return null;
-    }
-
-    private boolean isBuildingAt(Building building, int row, int col) {
-        boolean inRow = building.getRow() >= row && building.getRow() - building.getHeight() <= row;
-        boolean inCol = building.getCol() <= col && building.getCol() + building.getWidth() >= col;
-        return inRow && inCol;
-    }
-
-    public void placeBuilding(BuildingType type, int row, int col) throws BuildingPlacementException {
-        if (!getCanPlace(type, row, col)) {
-            throw new BuildingPlacementException("Cannot place building at row " + row + " and col " + col);
-        }
-        Building building = type.create(row, col);
-        buildings.add(building);
-    }
-
     public int getBuildingCount(BuildingType type) {
         int count = 0;
         for (Building building : buildings) {
@@ -88,6 +60,10 @@ public class Grid {
             }
         }
         return count;
+    }
+
+    public void placePath(int row, int col, int width, int height) {
+        paths.add(new Path(width, height, row, col));
     }
 
     public boolean getCanPlace(BuildingType type, int row, int col) {
@@ -113,12 +89,36 @@ public class Grid {
         return true;
     }
 
-    public void placePath(int row, int col, int width, int height) {
-        paths.add(new Path(width, height, row, col));
-    }
-
     public boolean getBuildingsAreWithinRadius(Building a, Building b, int radius) {
         Building area = new Area(a.getWidth() + (2 * radius), a.getHeight() + (2 * radius), a.getRow() + radius, a.getCol() - radius);
         return area.overlaps(b.getType(), b.getRow(), b.getCol());
+    }
+
+    private boolean isBuildingAt(Building building, int row, int col) {
+        boolean inRow = building.getRow() >= row && building.getRow() - building.getHeight() <= row;
+        boolean inCol = building.getCol() <= col && building.getCol() + building.getWidth() >= col;
+        return inRow && inCol;
+    }
+
+    public List<Building> getPlacedBuildings() {
+        return buildings;
+    }
+
+    public boolean getIsBuildingAt(int row, int col) {
+        for (Building building : buildings) {
+            if (isBuildingAt(building, row, col)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Building getBuildingAt(int row, int col) {
+        for (Building building : buildings) {
+            if (isBuildingAt(building, row, col)) {
+                return building;
+            }
+        }
+        return null;
     }
 }

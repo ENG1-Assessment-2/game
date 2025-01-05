@@ -23,6 +23,31 @@ public class BuildingImage extends Image {
         setSize();
     }
 
+    public void setPlaced() {
+        setDrawable(new TextureRegionDrawable(placedTexture));
+    }
+
+    public void setDragging(boolean isColliding) {
+        setDrawable(new TextureRegionDrawable(
+                isColliding ? collisionTexture : draggingTexture
+        ));
+    }
+
+    public BuildingType getType() {
+        return type;
+    }
+
+    public void updatePosition(Vector2 position) {
+        setPosition(position.x, position.y);
+    }
+
+    public void updateType(BuildingType type) {
+        this.type = type;
+        loadTextures();
+        setDrawable(new TextureRegionDrawable(draggingTexture));
+        setSize();
+    }
+
     private void loadTextures() {
         switch (type) {
             case ACCOMMODATION:
@@ -75,30 +100,5 @@ public class BuildingImage extends Image {
             default:
                 throw new IllegalArgumentException("Invalid building type");
         }
-    }
-
-    public void setPlaced() {
-        setDrawable(new TextureRegionDrawable(placedTexture));
-    }
-
-    public void setDragging(boolean isColliding) {
-        setDrawable(new TextureRegionDrawable(
-                isColliding ? collisionTexture : draggingTexture
-        ));
-    }
-
-    public BuildingType getType() {
-        return type;
-    }
-
-    public void updatePosition(Vector2 position) {
-        setPosition(position.x, position.y);
-    }
-
-    public void updateType(BuildingType type) {
-        this.type = type;
-        loadTextures();
-        setDrawable(new TextureRegionDrawable(draggingTexture));
-        setSize();
     }
 }

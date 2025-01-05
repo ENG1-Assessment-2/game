@@ -57,6 +57,18 @@ public class BuildingButton extends ImageButton {
         });
     }
 
+    public Label getCountLabel() {
+        return countLabel;
+    }
+
+    public BuildingType getType() {
+        return type;
+    }
+
+    public void update() {
+        updateCountLabel();
+    }
+
     static private ImageButtonStyle createButtonStyle(BuildingType type) {
         ImageButtonStyle style = new ImageButtonStyle();
         int index = type.ordinal();
@@ -73,20 +85,8 @@ public class BuildingButton extends ImageButton {
         );
     }
 
-    public void update() {
-        updateCountLabel();
-    }
-
     private void updateCountLabel() {
         int count = round.getBuildingCount(type);
         countLabel.setText(String.valueOf(count));
-    }
-
-    public Label getCountLabel() {
-        return countLabel;
-    }
-
-    public BuildingType getType() {
-        return type;
     }
 }
