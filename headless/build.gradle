@@ -17,9 +17,19 @@ dependencies {
     implementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
     implementation project(":core")
     testImplementation 'org.mockito:mockito-core:5.11.0'
+    api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
 
 }
 
 test {
     useJUnitPlatform()
+}
+
+sourceSets {
+  main {
+    resources {
+      srcDir 'assets'
+    }
+  }
 }
