@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.badlogic.UniSim2.BuildingTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2025-01-05T23:59:08" hostname="TANGYES_TOP" time="1.893">
+  <properties/>
+  <testcase name="testConstructorAndProperties()" classname="com.badlogic.UniSim2.BuildingTest" time="1.852"/>
+  <testcase name="testNameAndDescription()" classname="com.badlogic.UniSim2.BuildingTest" time="0.014"/>
+  <testcase name="testOverlapsYesOverlap()" classname="com.badlogic.UniSim2.BuildingTest" time="0.003"/>
+  <testcase name="testOverlapsNoOverlap()" classname="com.badlogic.UniSim2.BuildingTest" time="0.004"/>
+  <testcase name="testGetCostAndDerivedCosts()" classname="com.badlogic.UniSim2.BuildingTest" time="0.003"/>
+  <testcase name="testEdgeOverlapJustTouching()" classname="com.badlogic.UniSim2.BuildingTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\Jacob\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.12\be4984cb6fd1ef1d11f218a648889dfda44b8a15\byte-buddy-agent-1.14.12.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+Exception in thread "HeadlessApplication" com.badlogic.gdx.utils.GdxRuntimeException: Couldn't load file: startBackground.png
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:190)
+	at com.badlogic.gdx.graphics.TextureData$Factory.loadFromFile(TextureData.java:101)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:122)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:114)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:110)
+	at com.badlogic.UniSim2.resources.Assets.loadTextures(Assets.java:77)
+	at com.badlogic.UniSim2.Main.create(Main.java:29)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication.mainLoop(HeadlessApplication.java:108)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication$1.run(HeadlessApplication.java:93)
+Caused by: com.badlogic.gdx.utils.GdxRuntimeException: File not found: startBackground.png (Internal)
+	at com.badlogic.gdx.files.FileHandle.read(FileHandle.java:142)
+	at com.badlogic.gdx.files.FileHandle.readBytes(FileHandle.java:228)
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:187)
+	... 8 more
+Exception in thread "HeadlessApplication" com.badlogic.gdx.utils.GdxRuntimeException: Couldn't load file: startBackground.png
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:190)
+	at com.badlogic.gdx.graphics.TextureData$Factory.loadFromFile(TextureData.java:101)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:122)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:114)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:110)
+	at com.badlogic.UniSim2.resources.Assets.loadTextures(Assets.java:77)
+	at com.badlogic.UniSim2.Main.create(Main.java:29)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication.mainLoop(HeadlessApplication.java:108)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication$1.run(HeadlessApplication.java:93)
+Caused by: com.badlogic.gdx.utils.GdxRuntimeException: File not found: startBackground.png (Internal)
+	at com.badlogic.gdx.files.FileHandle.read(FileHandle.java:142)
+	at com.badlogic.gdx.files.FileHandle.readBytes(FileHandle.java:228)
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:187)
+	... 8 more
+Exception in thread "HeadlessApplication" com.badlogic.gdx.utils.GdxRuntimeException: Couldn't load file: startBackground.png
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:190)
+	at com.badlogic.gdx.graphics.TextureData$Factory.loadFromFile(TextureData.java:101)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:122)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:114)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:110)
+	at com.badlogic.UniSim2.resources.Assets.loadTextures(Assets.java:77)
+	at com.badlogic.UniSim2.Main.create(Main.java:29)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication.mainLoop(HeadlessApplication.java:108)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication$1.run(HeadlessApplication.java:93)
+Caused by: com.badlogic.gdx.utils.GdxRuntimeException: File not found: startBackground.png (Internal)
+	at com.badlogic.gdx.files.FileHandle.read(FileHandle.java:142)
+	at com.badlogic.gdx.files.FileHandle.readBytes(FileHandle.java:228)
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:187)
+	... 8 more
+Exception in thread "HeadlessApplication" com.badlogic.gdx.utils.GdxRuntimeException: Couldn't load file: startBackground.png
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:190)
+	at com.badlogic.gdx.graphics.TextureData$Factory.loadFromFile(TextureData.java:101)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:122)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:114)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:110)
+	at com.badlogic.UniSim2.resources.Assets.loadTextures(Assets.java:77)
+	at com.badlogic.UniSim2.Main.create(Main.java:29)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication.mainLoop(HeadlessApplication.java:108)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication$1.run(HeadlessApplication.java:93)
+Caused by: com.badlogic.gdx.utils.GdxRuntimeException: File not found: startBackground.png (Internal)
+	at com.badlogic.gdx.files.FileHandle.read(FileHandle.java:142)
+	at com.badlogic.gdx.files.FileHandle.readBytes(FileHandle.java:228)
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:187)
+	... 8 more
+Exception in thread "HeadlessApplication" com.badlogic.gdx.utils.GdxRuntimeException: Couldn't load file: startBackground.png
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:190)
+	at com.badlogic.gdx.graphics.TextureData$Factory.loadFromFile(TextureData.java:101)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:122)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:114)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:110)
+	at com.badlogic.UniSim2.resources.Assets.loadTextures(Assets.java:77)
+	at com.badlogic.UniSim2.Main.create(Main.java:29)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication.mainLoop(HeadlessApplication.java:108)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication$1.run(HeadlessApplication.java:93)
+Caused by: com.badlogic.gdx.utils.GdxRuntimeException: File not found: startBackground.png (Internal)
+	at com.badlogic.gdx.files.FileHandle.read(FileHandle.java:142)
+	at com.badlogic.gdx.files.FileHandle.readBytes(FileHandle.java:228)
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:187)
+	... 8 more
+Exception in thread "HeadlessApplication" com.badlogic.gdx.utils.GdxRuntimeException: Couldn't load file: startBackground.png
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:190)
+	at com.badlogic.gdx.graphics.TextureData$Factory.loadFromFile(TextureData.java:101)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:122)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:114)
+	at com.badlogic.gdx.graphics.Texture.<init>(Texture.java:110)
+	at com.badlogic.UniSim2.resources.Assets.loadTextures(Assets.java:77)
+	at com.badlogic.UniSim2.Main.create(Main.java:29)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication.mainLoop(HeadlessApplication.java:108)
+	at com.badlogic.gdx.backends.headless.HeadlessApplication$1.run(HeadlessApplication.java:93)
+Caused by: com.badlogic.gdx.utils.GdxRuntimeException: File not found: startBackground.png (Internal)
+	at com.badlogic.gdx.files.FileHandle.read(FileHandle.java:142)
+	at com.badlogic.gdx.files.FileHandle.readBytes(FileHandle.java:228)
+	at com.badlogic.gdx.graphics.Pixmap.<init>(Pixmap.java:187)
+	... 8 more
+]]></system-err>
+</testsuite>
