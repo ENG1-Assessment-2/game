@@ -3,6 +3,14 @@ plugins {
     id 'jacoco'
 }
 
+sourceSets {
+    test {
+        java {
+            srcDir 'headless' 
+        }
+    }
+}
+
 group = 'org.example'
 version = 'unspecified'
 
