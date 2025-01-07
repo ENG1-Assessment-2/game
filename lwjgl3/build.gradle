@@ -6,14 +6,56 @@ buildscript {
   dependencies {
     if(enableGraalNative == 'true') {
       classpath "org.graalvm.buildtools.native:org.graalvm.buildtools.native.gradle.plugin:0.9.28"
+    checkstyleRules(
+    "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
+    transitive = false
+  }
+    
     }
   }
 }
 plugins {
   id "io.github.fourlastor.construo" version "1.4.1"
   id "application"
+  id "java"
+  id "jacoco"
+  id "checkstyle"
 }
 
+jacocoTestReport {
+  dependsOn test
+  sourceSets project(':core').sourceSets.main
+  dependsOn test
+
+  reports {
+    xml.required = true
+    html.required = true
+    html.destination file("${buildDir}/reports/jacoco/test/html")
+  }
+}
+
+
+test {
+  useJUnitPlatform()
+  finalizedBy jacocoTestReport
+}
+
+def checkstyleVersion = '10.4'
+configurations {
+  checkstyleRules
+}
+
+checkstyle {
+  toolVersion "${checkstyleVersion}"
+    config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
+}
+
+dependencies {
+checkstyleRules(
+  "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
+  transitive = false
+  }
+}
 
 import io.github.fourlastor.construo.Target
 
