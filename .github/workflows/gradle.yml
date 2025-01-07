@@ -32,7 +32,7 @@ jobs:
       shell: bash
     
     - name: Run tests and generate JaCoCo report
-      run: ./gradlew test jacocoTestReport
+      run: gradle build jacocoTestReport
       shell: bash
     
     - name: Upload JaCoCo Report
