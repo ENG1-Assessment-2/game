@@ -32,10 +32,7 @@ jobs:
       shell: bash
     
     - name: Run tests
-      run: ./gradlew test 
-
-    - name: Run Test Coverage
-      run: ./gradlew jacocoTestReport
+      run: ./gradlew test jacocoTestReport
 
     - name: Upload JaCoCo Report
       uses: actions/upload-artifact@v4
