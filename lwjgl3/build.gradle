@@ -51,19 +51,17 @@ checkstyle {
   toolVersion "${checkstyleVersion}"
   config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
   reports {
-    html.enabled = true
-    html.outputLocation = file("${buildDir}/reports/checkstyle/main.html")
-    xml.enabled = true
-    xml.outputLocation = file("${buildDir}/reports/checkstyle/main.xml")
+    html.required = true
+    html.destination = file("${buildDir}/reports/checkstyle/main.html")
   }
 }
 
 }
 
 dependencies {
-checkstyleRules(
-  "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
-  transitive = false
+  checkstyleRules(
+    "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
+    transitive = false
   }
 }
 
