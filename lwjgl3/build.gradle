@@ -29,8 +29,8 @@ jacocoTestReport {
   dependsOn test
 
   reports {
-    xml.required = true
     html.required = true
+    csv.enabled true
     html.destination file("${buildDir}/reports/jacoco/test/html/jacoco")
   }
 }
@@ -50,6 +50,7 @@ test {
   }
   finalizedBy jacocoTestReport
 }
+check.dependsOn jacocoTestReport
 
 apply plugin:'checkstyle'
 def checkstyleVersion = '10.4'
