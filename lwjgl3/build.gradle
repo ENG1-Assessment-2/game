@@ -49,12 +49,12 @@ configurations {
 
 checkstyle {
   toolVersion "${checkstyleVersion}"
-    config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
-    reports {
-      html.enabled = true
-      html.outputLocation = file("${buildDir}/reports/checkstyle/main.html")
-      xml.enabled = true
-      xml.outputLocation = file("${buildDir}/reports/checkstyle/main.xml")
+  config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
+  reports {
+    html.enabled = true
+    html.outputLocation = file("${buildDir}/reports/checkstyle/main.html")
+    xml.enabled = true
+    xml.outputLocation = file("${buildDir}/reports/checkstyle/main.xml")
   }
 }
 
