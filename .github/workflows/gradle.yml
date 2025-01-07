@@ -30,7 +30,13 @@ jobs:
     - name: Build the project
       run: ./gradlew clean build
       shell: bash
+    
+    - name: make the checkstyle dir
+      run: mkdir -p /home/runner/work/game/game/lwjgl3/build/reports/checkstyle
 
+    - name: make the jacoco dir
+      run: mkdir -p /home/runner/work/game/game/lwjgl3/build/jacoco/test/html/jacoco
+    
     - name: Run tests and generate JaCoCo report
       run: ./gradlew test jacocoTestReport
       shell: bash
