@@ -46,6 +46,17 @@ jacocoTestReport {
 
 test {
   useJUnitPlatform()
+  testLogging {
+    events "passed", "skipped", "failed"
+    exceptionFormat "short"
+    debug {
+      events "started", "passed", "skipped", "failed"
+      exceptionFormat "full"
+    }
+    info {
+      events "passed", "skipped", "failed"
+    }
+  }
   finalizedBy jacocoTestReport
 }
 
