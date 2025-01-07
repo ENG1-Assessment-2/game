@@ -2,9 +2,9 @@ name: Continuous Integration
 
 on:
   push:
-    branches: [ "ci3" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "ci3" ]
+    branches: [ "main" ]
 jobs:
   build:
     runs-on: ubuntu-latest
