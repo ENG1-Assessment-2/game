@@ -9,7 +9,6 @@ buildscript {
     checkstyleRules(
     "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
     transitive = false
-    implementation project(':core')
   }
     
     }
@@ -21,13 +20,6 @@ plugins {
   id "java"
   id "jacoco"
   id "checkstyle"
-}
-sourceSets {
-    main {
-        java {
-            srcDir project(':core').sourceSets.main.java.srcDirs
-        }
-    }
 }
 
 apply plugin: 'jacoco'
@@ -42,7 +34,6 @@ jacocoTestReport {
     html.destination file("${buildDir}/reports/jacoco/test/html/jacoco")
   }
 }
-
 
 test {
   useJUnitPlatform()
