@@ -35,7 +35,7 @@ jobs:
       run: mkdir -p /home/runner/work/game/game/lwjgl3/build/reports/checkstyle
 
     - name: make the jacoco dir
-      run: mkdir -p /home/runner/work/game/game/lwjgl3/build/jacoco/test/html/jacoco
+      run: mkdir -p /home/runner/work/game/game/lwjgl3/build/reports/jacoco/test/html/jacoco
     
     - name: Run tests and generate JaCoCo report
       run: ./gradlew test jacocoTestReport
@@ -51,4 +51,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: checkstyle-report
-        path: build/reports/checkstyle
+        path: build/reports/checkstyle/main.xml
