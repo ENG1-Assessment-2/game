@@ -30,7 +30,6 @@ jacocoTestReport {
 
   reports {
     html.required = true
-    csv.enabled true
     html.destination file("${buildDir}/reports/jacoco/test/html/jacoco")
   }
 }
