@@ -31,12 +31,6 @@ jobs:
       run: ./gradlew clean build
       shell: bash
     
-    - name: make the checkstyle dir
-      run: mkdir -p /home/runner/work/game/game/lwjgl3/build/reports/checkstyle
-
-    - name: make the jacoco dir
-      run: mkdir -p /home/runner/work/game/game/lwjgl3/build/jacoco/test/html/jacoco
-    
     - name: Run tests and generate JaCoCo report
       run: ./gradlew test jacocoTestReport
       shell: bash
@@ -45,10 +39,10 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: jacoco-report
-        path: build/reports/jacoco/test/html/jacoco
+        path: lwjgl3/build/reports/jacoco/test/html/jacoco
 
     - name: Upload Checkstyle report
       uses: actions/upload-artifact@v4
       with:
         name: checkstyle-report
-        path: build/reports/checkstyle
+        path: lwjgl3/build/reports/checkstyle/main.xml
