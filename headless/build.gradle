@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'jacoco'
 }
 
 group = 'org.example'
@@ -19,6 +20,31 @@ dependencies {
     api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 }
 
-test {
-    useJUnitPlatform()
+apply plugin: 'jacoco'
+jacocoTestReport {
+  dependsOn test
+  sourceSets project(':core').sourceSets.main
+  dependsOn test
+
+  reports {
+    html.required = true
+    html.destination file("${buildDir}/reports/jacoco/test/html/jacoco")
+  }
 }
+
+test {
+  useJUnitPlatform()
+  testLogging {
+    events "passed", "skipped", "failed"
+    exceptionFormat "short"
+    debug {
+      events "started", "passed", "skipped", "failed"
+      exceptionFormat "full"
+    }
+    info {
+      events "passed", "skipped", "failed"
+    }
+  }
+  finalizedBy jacocoTestReport
+}
+check.dependsOn jacocoTestReport
