@@ -22,6 +22,15 @@ plugins {
   id "checkstyle"
 }
 
+sourceSets {
+    test {
+        java {
+            srcDir 'headless' 
+        }
+    }
+}
+
+
 apply plugin: 'jacoco'
 jacocoTestReport {
   dependsOn test
