@@ -50,11 +50,6 @@ configurations {
 checkstyle {
   toolVersion = "${checkstyleVersion}"
   config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
-  
-  reports {
-    html.required = true
-    html.destination = file("${buildDir}/reports/checkstyle/main.html")
-  }
 }
 
 dependencies {
