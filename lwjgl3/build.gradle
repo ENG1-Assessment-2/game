@@ -22,6 +22,7 @@ plugins {
   id "checkstyle"
 }
 
+apply plugin: 'jacoco'
 jacocoTestReport {
   dependsOn test
   sourceSets project(':core').sourceSets.main
@@ -40,6 +41,7 @@ test {
   finalizedBy jacocoTestReport
 }
 
+apply plugin:'checkstyle'
 def checkstyleVersion = '10.4'
 configurations {
   checkstyleRules
