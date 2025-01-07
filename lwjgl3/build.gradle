@@ -34,8 +34,7 @@ sourceSets {
 apply plugin: 'jacoco'
 jacocoTestReport {
   dependsOn test
-  sourceSets project(':core').sourceSets.main
-  dependsOn test
+
 
   reports {
     html.required = true
