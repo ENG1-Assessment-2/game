@@ -31,7 +31,7 @@ jacocoTestReport {
   reports {
     xml.required = true
     html.required = true
-    html.destination file("${buildDir}/reports/jacoco/test/html")
+    html.destination file("${buildDir}/reports/jacoco/test/html/jacoco")
   }
 }
 
