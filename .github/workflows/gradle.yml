@@ -40,9 +40,6 @@ jobs:
     - name: Run tests and generate JaCoCo report
       run: ./gradlew test jacocoTestReport
       shell: bash
-
-    - name: List files in JaCoCo reports directory
-      run: ls -R build/reports/jacoco/test/html/jacoco
     
     - name: Upload JaCoCo Report
       uses: actions/upload-artifact@v4
