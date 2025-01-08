@@ -59,7 +59,7 @@ test {
 sourceSets {
     test {
         java {
-            srcDir 'headless/src/test/java/com/badlogic/UniSim2' 
+            srcDir 'headless/src' 
         }
     }
 }
