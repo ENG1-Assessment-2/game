@@ -21,6 +21,7 @@ plugins {
   id "java"
   id "jacoco"
   id "checkstyle"
+  id 'java-library'
 }
 
 sourceSets {
