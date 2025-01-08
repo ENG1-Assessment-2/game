@@ -2,6 +2,7 @@
 buildscript {
   repositories {
     gradlePluginPortal()
+    mavenCentral()
   }
   dependencies {
     if(enableGraalNative == 'true') {
@@ -24,9 +25,6 @@ plugins {
   id 'java-library'
 }
 
-repositories {
-    mavenCentral()
-}
 sourceSets {
     test {
         java {
@@ -73,6 +71,12 @@ configurations {
 checkstyle {
   toolVersion = "${checkstyleVersion}"
   config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
+  reports {
+        html.enabled = true
+        html.destination = file("${buildDir}/reports/checkstyle/test.html")
+        xml.enabled = true
+        xml.destination = file("${buildDir}/reports/checkstyle/test.xml")
+    }
 }
 
 dependencies {
