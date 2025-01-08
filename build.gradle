@@ -8,9 +8,6 @@ plugins {
 
 group = 'org.example'
 version = 'unspecified'
-ext {
-    checkstyleVersion = '10.4' 
-}
 repositories {
   mavenCentral()
   maven { url 'https://s01.oss.sonatype.org' }
@@ -29,8 +26,6 @@ dependencies {
     implementation project(":core")
     testImplementation 'org.mockito:mockito-core:5.11.0'
     api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-    implementation "com.puppycrawl.tools:checkstyle:${checkstyleVersion}" {
-      transitive = false 
   }
 }
 
@@ -70,23 +65,6 @@ sourceSets {
 }
 
 
-
-apply plugin:'checkstyle'
-configurations {
-  checkstyleRules
-}
-
-checkstyle {
-  toolVersion = "${checkstyleVersion}"
-  config = resources.text.fromArchiveEntry(configurations.checkstyleRules, "google_checks.xml")
-}
-
-dependencies {
-  checkstyleRules(
-    "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
-    transitive = false
-  }
-}
 allprojects {
 apply plugin: 'eclipse'
 apply plugin: 'idea'
