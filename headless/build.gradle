@@ -21,7 +21,13 @@ dependencies {
     api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 }
 
-apply plugin: 'jacoco'
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', project(':core').sourceSets.main.java.srcDirs]
+        }
+    }
+}
 jacocoTestReport {
   dependsOn test
   sourceSets project(':core').sourceSets.main
