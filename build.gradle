@@ -1,9 +1,3 @@
-dependencies {
-  checkstyleRules(
-  "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
-  transitive = false
-  }
-
 plugins {
     id 'java'
     id 'jacoco'
@@ -35,6 +29,11 @@ dependencies {
     api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
   }
 }
+dependencies {
+  checkstyleRules(
+  "com.puppycrawl.tools:checkstyle:${checkstyleVersion}") {
+  transitive = false
+  }
 
 
 apply plugin: 'jacoco'
