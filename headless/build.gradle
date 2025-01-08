@@ -6,7 +6,7 @@ plugins {
 sourceSets {
     test {
         java {
-            srcDir 'headless/src/test/java/com/badlogic/UniSim2/AbstractHeadlessGdxTest.java' 
+            srcDir 'headless/src/test/java/com/badlogic/UniSim2' 
         }
     }
 }
