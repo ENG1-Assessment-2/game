@@ -8,6 +8,7 @@ plugins {
 
 group = 'org.example'
 version = 'unspecified'
+def checkstyleVersion = '10.4'
 
 repositories {
   mavenCentral()
@@ -70,7 +71,6 @@ sourceSets {
 
 
 apply plugin:'checkstyle'
-def checkstyleVersion = '10.4'
 configurations {
   checkstyleRules
 }
