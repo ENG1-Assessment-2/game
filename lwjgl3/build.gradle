@@ -23,37 +23,6 @@ plugins {
   id "checkstyle"
 }
 
-sourceSets {
-    test {
-        java {
-            srcDir 'headless/src/main/java/com/badlogic/UniSim2' 
-        }
-    }
-}
-test {
-  useJUnitPlatform()
-  testLogging {
-    events "passed", "skipped", "failed"
-    exceptionFormat "short"
-    debug {
-      events "started", "passed", "skipped", "failed"
-      exceptionFormat "full"
-    }
-    info {
-      events "passed", "skipped", "failed"
-    }
-  }
-  finalizedBy jacocoTestReport
-}
-jacocoTestReport {
-  dependsOn test
-  reports {
-    html.required = true
-    html.destination file("${buildDir}/reports/jacoco/test/html/jacoco")
-  }
-}
-check.dependsOn jacocoTestReport
-
 apply plugin:'checkstyle'
 def checkstyleVersion = '10.4'
 configurations {
