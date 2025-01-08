@@ -27,9 +27,6 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:5.11.0'
     api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
   }
-}
-
-
 apply plugin: 'jacoco'
 jacocoTestReport {
   dependsOn test
