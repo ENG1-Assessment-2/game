@@ -29,8 +29,8 @@ dependencies {
     api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
     implementation "com.puppycrawl.tools:checkstyle:${checkstyleVersion}" {
     transitive = false 
+  }
 }
-
 
 
 apply plugin: 'jacoco'
