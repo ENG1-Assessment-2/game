@@ -35,7 +35,6 @@ jacocoTestReport {
 
 test {
   useJUnitPlatform()
-  sourceSets project(':core').sourceSets.main
   testLogging {
     events "passed", "skipped", "failed"
     exceptionFormat "short"
