@@ -8,8 +8,9 @@ plugins {
 
 group = 'org.example'
 version = 'unspecified'
-def checkstyleVersion = '10.4'
-
+ext {
+    checkstyleVersion = '10.4' 
+}
 repositories {
   mavenCentral()
   maven { url 'https://s01.oss.sonatype.org' }
