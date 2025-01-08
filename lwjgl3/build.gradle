@@ -24,6 +24,9 @@ plugins {
   id 'java-library'
 }
 
+repositories {
+    mavenCentral()
+}
 sourceSets {
     test {
         java {
