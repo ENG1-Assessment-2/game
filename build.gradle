@@ -3,8 +3,8 @@ plugins {
     id 'jacoco'
     id 'checkstyle'
     id 'eclipse'
+    id 'java-library'
 }
-
 
 group = 'org.example'
 version = 'unspecified'
