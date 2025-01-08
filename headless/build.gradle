@@ -4,14 +4,6 @@ plugins {
     id 'java-library'
 }
 
-sourceSets {
-    test {
-        java {
-            srcDir 'headless/src' 
-        }
-    }
-}
-
 group = 'org.example'
 version = 'unspecified'
 
@@ -32,7 +24,7 @@ dependencies {
 apply plugin: 'jacoco'
 jacocoTestReport {
   dependsOn test
-
+  sourceSets project(':core').sourceSets.main
   reports {
     html.required = true
     html.destination file("${buildDir}/reports/jacoco/test/html/jacoco")
