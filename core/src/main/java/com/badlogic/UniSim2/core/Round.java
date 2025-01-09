@@ -376,4 +376,12 @@ public class Round {
     public Set<Achievement> getAllAchievements() {
         return ALL_ACHIEVEMENTS;
     }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public Grid getGrid() {
+        return grid;
+    }
 }
