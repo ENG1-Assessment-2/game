@@ -1,29 +1,72 @@
-plugins {
-    id 'java'
-    id 'jacoco'
-    id 'checkstyle'
-    id 'eclipse'
-    id 'java-library'
+
+buildscript {
+  repositories {
+    mavenCentral()
+    maven { url 'https://s01.oss.sonatype.org' }
+    gradlePluginPortal()
+    mavenLocal()
+    google()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+  }
+}
+  plugins{
+  id 'java'
+  id 'java-library'
+  id 'jacoco'
+  id 'checkstyle'
+}
+gdxVersion = '1.13.0'
+dependencies {
+    implementation project(":core")
+  }
+
+task printSourceSetInformation(){
+    doLast{
+        sourceSets.each { srcSet ->
+            println "["+srcSet.name+"]"
+            print "-->Source directories: "+srcSet.allJava.srcDirs+"\n"
+            print "-->Output directories: "+srcSet.output.classesDirs.files+"\n"
+            println ""
+        }
+    }
 }
 
-repositories {
-  mavenCentral()
-  maven { url 'https://s01.oss.sonatype.org' }
-  gradlePluginPortal()
-  mavenLocal()
-  google()
-  maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-  maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+
+jacocoTestReport {
+  dependsOn test
+  reports {
+    html.required = true
+    html.destination file("${buildDir}/reports/jacoco/test/html/jacoco")
+  }
 }
+
+test {
+  useJUnitPlatform()
+  testLogging {
+    events "passed", "skipped", "failed"
+    exceptionFormat "short"
+    debug {
+      events "started", "passed", "skipped", "failed"
+      exceptionFormat "full"
+    }
+    info {
+      events "passed", "skipped", "failed"
+    }
+  }
+  finalizedBy jacocoTestReport
+}
+check.dependsOn jacocoTestReport
 
 allprojects {
-apply plugin: 'eclipse'
-apply plugin: 'idea'
+  apply plugin: 'eclipse'
+  apply plugin: 'idea'
+
   // This allows you to "Build and run using IntelliJ IDEA", an option in IDEA's Settings.
- idea {
-   module {
-    outputDir file('build/classes/java/main')
-    testOutputDir file('build/classes/java/test')
+  idea {
+    module {
+      outputDir file('build/classes/java/main')
+      testOutputDir file('build/classes/java/test')
     }
   }
 }
@@ -50,10 +93,10 @@ configure(subprojects) {
       assetsFile.append(it + "\n")
     }
   }
-processResources.dependsOn 'generateAssetList'
+  processResources.dependsOn 'generateAssetList'
 
-compileJava {
-  options.incremental = true
+  compileJava {
+    options.incremental = true
   }
 }
 
