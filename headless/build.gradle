@@ -4,8 +4,8 @@ plugins {
     id 'java-library'
 }
 
-group = 'org.example'
-version = 'unspecified'
+group = 'com.badlogic.UniSim2'
+gdxversion = '1.13.0'
 
 repositories {
     mavenCentral()
@@ -22,18 +22,21 @@ dependencies {
 }
 
 sourceSets {
-    main {
+    test {
         java {
-            srcDirs = ['src/main/java', project(':core').sourceSets.main.java.srcDirs]
+            srcDirs = ['headless/src/test/java/com/badlogic/UniSim2']
         }
+        resources {
+            srcDirs = ['core/src/main/java/com/badlogic/UniSim2']
     }
 }
 jacocoTestReport {
   dependsOn test
-  sourceSets project(':core').sourceSets.main
   reports {
     html.required = true
-    html.destination file("${buildDir}/reports/jacoco/test/html/jacoco")
+    xml.required = true
+    html.destination file("${buildDir}/build/reports/jacoco/test/html")
+    xml.destination file("${buildDir}/build/reports/jacoco/test/xml")
   }
 }
 
