@@ -4,8 +4,8 @@ plugins {
     id 'java-library'
 }
 
-group = 'org.example'
-version = 'unspecified'
+group = 'com.badlogic.UniSim2'
+gdxVersion = '1.13.0'
 
 repositories {
     mavenCentral()
@@ -20,7 +20,16 @@ dependencies {
     api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 }
 
-
+sourceSets {
+    headless {
+        java {
+            srcDirs = ['headless/src/test/java/com/badlogic/UniSim2']
+        }
+        resources {
+            srcDirs = ['headless/src/resources']
+        }
+    }
+}
 jacocoTestReport {
   dependsOn test
   reports {
@@ -44,3 +53,4 @@ test {
   }
   finalizedBy jacocoTestReport
 }
+check.dependsOn jacocoTestReport
